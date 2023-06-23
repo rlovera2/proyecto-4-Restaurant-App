@@ -1,0 +1,291 @@
+/*****************************************************/
+/*********** Definiendo estilo a los enlace **********/
+/*****************************************************/
+
+a{
+    color:  rgb(239, 181, 10);
+    text-decoration: none;
+    
+    }
+    a:link{
+        color: rgb(239, 181, 10);
+        text-decoration: none;
+    }
+    
+    a:hover{
+        color:rgb(239, 181, 10);
+        text-decoration: underline;
+    
+    }
+    
+    a:active {
+        color:red;
+        }
+    
+        a:visited {
+            color:rgb(85, 85, 115);
+    
+        }
+
+        
+/*****************************************************/
+/***************** Declarando Clases *****************/
+/*****************************************************/
+
+
+.margenes{
+    margin-top: 0%;
+    margin-bottom: 0%;
+    margin-left: 0%;
+    margin-right: 0%;
+
+}
+
+.tituloPagina{
+    font-size:xx-large;
+    font-style:normal;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(110, 57, 7);
+
+}
+
+
+.subtituloTabla{
+    font-size:medium;
+    font-style:normal;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(110, 57, 7);
+
+}
+
+.texto{
+font-size: medium;
+font-style: normal;
+font-family: Arial, Helvetica, sans-serif;
+color: rgb(58, 30, 3);
+
+
+} 
+
+.tabla_menu{
+   
+
+    text-align: center;
+}
+
+.celdas_tabla_menu{
+
+    height: 100px;
+    vertical-align: top;
+}
+
+
+.contenedor_header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(78, 41, 4);
+    font-size:large;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    color: white;
+    width: auto;
+    height: 100px;     
+}
+
+
+.titulo_columnas_tabla{
+
+    background-color: rgb(101, 53, 5);
+    border: 2px solid;
+    border-color: rgb(231, 162, 82);
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:medium;
+    color: white;
+    text-align: center;
+}
+
+
+.registros{
+
+    background-color: rgb(226, 234, 255);
+    text-align: center;
+    border: 2px solid; 
+    border-collapse: collapse;
+}
+
+.contenedor_footer{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(183, 85, 4);
+            font-size:medium;
+            font-family: Arial, Helvetica, sans-serif;
+            font-style:normal;
+            color: white;
+            width: auto;
+            height: auto;
+                 
+}
+
+.contenedor_principal{
+    display: flex;
+    justify-content:space-evenly;
+    gap: 10px;
+    background-color: rgb(98, 76, 61);
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    color: white;
+    align-items:center ;
+    align-content: center;
+    height: auto;
+    width: auto; 
+    /*padding: 4px;*/
+
+}
+
+.imagenes_home{
+     align-items:center ;
+    /* align-content: center; */
+    height: 300px;
+    border-radius: 14px;
+    padding: 4px;
+
+}
+
+.imagenes_redes{
+   align-items:center ;
+   align-content: center;
+   height: 80px;
+   width: 80px;
+   border-radius: 14px;
+   padding: 4px;
+
+}
+
+.etiquetas{
+    display: flex;
+    align-items: center;
+    background-color:  rgb(96, 50, 1);
+    font-size:medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    color: rgb(254, 253, 252);
+    height: 30px;     
+
+}
+
+
+.campos{
+    display: flex;
+    align-items:center;
+    width: 310px;
+    font-size:medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    color: rgb(135, 63, 3);
+    /*border: 10px;*/
+    border-color: rgb(204, 169, 141);
+    
+}
+
+
+.celdas_formulario{
+    text-align: center;
+
+}
+
+.botones_formularios{
+    background-color: rgb(96, 50, 1);
+    font-size:medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    color: rgb(255, 255, 255);
+}
+
+
+.mensaje{
+    display:none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:medium;
+    color: rgb(245, 52, 52);
+}   
+
+/***********************************************/
+/******************* Media Queries *************/
+/***********************************************/
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media only screen and (max-width: 1400px) {
+    
+    main{
+
+        display: flex;
+        flex-flow:wrap;
+        justify-content:space-evenly;
+    }
+   
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media only screen and (max-width: 1200px) {
+
+    main{
+
+        display: flex;
+        flex-flow:wrap;
+        justify-content:space-evenly;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+
+    main{
+
+        display: flex;
+        flex-flow:wrap;
+        justify-content:space-evenly;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+
+    main{
+
+        display: flex;
+        flex-flow:wrap;
+        justify-content:space-evenly;
+    }
+
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (max-width: 576px) {
+
+    main{
+
+        display: flex;
+        flex-flow:wrap;
+        justify-content:space-evenly;
+    }
+
+}
+
+/*X-Small devices (portrait phones, less than 576px)*/
+@media only screen and (max-width: 320px) {
+
+    main{
+
+        display: flex;
+        flex-flow:wrap;
+        justify-content:space-evenly;
+    }
+}
