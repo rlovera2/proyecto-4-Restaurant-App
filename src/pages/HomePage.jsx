@@ -18,13 +18,28 @@ import Footer from "../components/Footer";
 const HomePage = () => {
     return (
       <>
-        <main className="row contenedor_principal">
+      <Header />
+        <main className="row">
+        
+          <article className="col">
+          
+          <div className="texto_Home">
+          <br /> 
+        
+        <table align="center"><tr><td>
 
-        <Header />
-          <article className="contenedor_principal">Bienvenidos a tu restaurante La Pasta</article>
+          <marquee>
+          Bienvenidos a tu restante la pasta...
+          </marquee>
+
+          </td></tr></table>
         
-          <article className="col contenedor_principal">
-        
+          <br /><br />
+
+          </div>
+          
+          <div className="contenedor_principal">
+            
             <img id="platos_fuertes" src={image_ragu} className="imagenes_home"  
             onMouseOver={() => cambiarImagenOn('platos_fuertes',image_pizza)}  
             onMouseOut={() => cambiarImagenOff('platos_fuertes',image_ragu)} />
@@ -32,16 +47,22 @@ const HomePage = () => {
             <img id="postres" src={image_tiramisu} className="imagenes_home" 
             onMouseOver={() => cambiarImagenOn('postres',image_panacota)} 
             onMouseOut={() => cambiarImagenOff('postres',image_tiramisu)} />
-    
-          </article>
-        <section className="contenedor_principal">
+          <br/>
+          
+          </div>
+          
+          <div className="contenedor_principal">
+          <br/>  <br/>
         <img id="facebook" src={image_facebook} className="imagenes_redes"  />
         <img id="instagram" src={image_instagram} className="imagenes_redes"   />
         <img id="whatsapp" src={image_whatsapp} className="imagenes_redes"  />
         <img id="map" src={image_map} className="imagenes_redes"  />
-        </section>
-          <Footer />
+        <br/>  <br/>
+        </div>
+        </article>
+          
         </main>
+        <Footer />
       </>
     );
   };

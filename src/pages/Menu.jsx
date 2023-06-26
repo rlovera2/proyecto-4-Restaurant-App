@@ -7,10 +7,11 @@ import Footer from "../components/Footer";
 const Menu = () => {
     return (
       <>
+      <Header />
         <main className="row">
           <article className="col">
 
-            <Header />
+
             <br />
             <table><tr><td>
             <span className="tituloPagina">Menu</span>
@@ -58,11 +59,11 @@ const Menu = () => {
 
             </td></tr>
             </table>
-            
-            <Footer />
           
           </article>
+
         </main>
+        <Footer />
       </>
     );
   };

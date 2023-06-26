@@ -8,7 +8,7 @@ const NavBar = () => {
       data-bs-theme="dark" 
     >
       <div className="container" height="auto" width="500px">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           <img src={image1} height="15%" width="15%" />
           <font color="#FFFFFF">
         La Pasta</font>
@@ -42,7 +42,7 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/Contactenos">
+              <NavLink className="nav-link" to="/contactenos">
                 Contactenos
               </NavLink>
             </li>
