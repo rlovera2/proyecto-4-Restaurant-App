@@ -7,20 +7,23 @@
 
     <title>...:: proyecto-4-Restaurant-App ::...</title>
 
-    <!-- <script>
-  //************CAMBIANDO IMAGEN PRINCIPAL CUANDO TIENE EL FOCO ***************/
-  const cambiarImagenOn = (id) =>{
-            
-            document.getElementById(id).src=image_pizza;
-         };
+<script>
+
+//***** CAMBIANDO EL COLOR DEL REGISTRO CUANDO SE ESTA SOBRE EL REGISTRO *******//
+
+const cambiar_color_over = (id) => {
+        document.getElementById(id).style.backgroundColor ="Pink";
       
-        //************CAMBIANDO IMAGEN PRINCIPAL CUANDO PIERDE EL FOCO ***************/
-        const cambiarImagenOff = (id) =>{
-                  
-          document.getElementById(id).src=image_ragu;
-       };
-      
-      </script> -->
+    };
+
+//***** CAMBIANDO EL COLOR DEL REGISTRO CUANDO SE ESTA FUERA DEL REGISTRO *******//
+
+const cambiar_color_out = (id) => {
+        document.getElementById(id).style.backgroundColor ="rgb(242, 200, 144)"; 
+           
+    };
+    
+</script> 
     
     <link rel="stylesheet" href="./src/css/mis_Estilos.css" />
 

@@ -1,11 +1,15 @@
 /************ IMPORTANDO IMAGENES **************************/
 import image_reservaciones from "../img/reservaciones.jpg";
-import image_logo_tarjetas from "../img/logo_tarjetas.png"
+import image_logo_tarjetas from "../img/logo_tarjetas.png";
+import image_actualizar_reservacion from "../img/actualizar.png";
+import image_editar_reservacion from "../img/editar.png";
+import image_eliminar_reservacion from "../img/eliminar.png";
 
 
 /*********** IMPORTANDO COMPONENTES ************************/
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+
 
 /*********** IMPORTANDO BASE DE DATOS **********************/
 import {db} from "../firebase/firebase";
@@ -126,7 +130,20 @@ const Reservaciones = () => {
                     <input type="button" value="Enviar" className="botones_formularios" onClick={validarDatos} />
            
               </form>
-              hola
+              <div> 
+              <input type="button" value="Actualizar" className="botones_formularios" onClick={recargarPagina} />
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col" className="titulo_columnas_tabla">Localizador</th>
+                    <th scope="col" className="titulo_columnas_tabla">Fecha</th>
+                    <th scope="col" className="titulo_columnas_tabla">Hora</th>
+                    <th scope="col" className="titulo_columnas_tabla">Operaciones</th>
+                  </tr>
+                </thead>
+                <tbody id="cuerpoTabla"></tbody>
+        </table> 
           </div>   
          </article>
 
@@ -273,7 +290,14 @@ const crearReservacion = async () =>{
 
     const coleccionReservaciones = collection(db, "Reservaciones");
     await addDoc(coleccionReservaciones, reservacion);
+    recargarPagina();
     await obtenerReservaciones();
+
+};
+
+const recargarPagina = () =>{
+ 
+              location.reload();
 
 };
 
@@ -285,10 +309,52 @@ const obtenerReservaciones = async () =>{
     const reservaciones = reservacionesDB.docs.map((reservacion) => ({
         id: reservacion.id,
         ...reservacion.data(),
-    }));    
-    console.log(reservaciones);
+        
+    }));   
+    
 
+    for ( let i = 0; i < reservaciones.length; i++ ) {
+
+      document.getElementById("cuerpoTabla").innerHTML +=`<tr class="registros" id="${reservaciones[i].id}" 
+      onmouseover="cambiar_color_over('${reservaciones[i].id}')"  onmouseout="cambiar_color_out('${reservaciones[i].id}')">
+        <td ><a href="onclick:editarReservacion()">${reservaciones[i].localizador}</a></td>
+        <td>${reservaciones[i].fecha}</td>
+        <td>${reservaciones[i].hora}</td>
+        <td>
+        <a href="onclick:editarReservacion()" >
+        <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación">
+        </a>
+
+        <a href="#">
+        <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación"></a>
+        </td>
+        </tr>`;
+
+      console.log(reservaciones[i].localizador);
+    }
+    
+    
+
+    // for ( let i = 0; i < reservaciones.length; i++ ) {
+    //   reservaciones.shift();
+    // } 
+    
+  };   
+ 
+
+const editarReservacion = () =>{
+    document.getElementById("localizadorInput").value="UYUYUY";
+};
+
+  const actualizarReservacion =  () =>{
+    
+
+    console.log("actualizar");
 };
 
 
+//await obtenerReservaciones();
+
 export default Reservaciones;
+
+window.addEventListener("load",obtenerReservaciones());

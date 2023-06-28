@@ -37,7 +37,7 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/reservaciones">
+              <NavLink className="nav-link"  to="/reservaciones">
                 Reservaciones
               </NavLink>
             </li>
