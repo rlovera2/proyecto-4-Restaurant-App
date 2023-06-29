@@ -137,7 +137,7 @@ const crearReservacion = async () =>{
 
   const coleccionReservaciones = collection(db, "Reservaciones");
   await addDoc(coleccionReservaciones, reservacion);
-  recargarPagina();
+  //recargarPagina();
   await obtenerReservaciones();
 
 };
@@ -151,35 +151,38 @@ const recargarPagina = () =>{
 
 const obtenerReservaciones = async () =>{
 
-  const coleccionReservaciones = collection(db, "Reservaciones");
-  const reservacionesDB = await getDocs(coleccionReservaciones);
+  const collectionReservaciones = collection(db, "Reservaciones");
+  const reservacionesDB = await getDocs(collectionReservaciones);
   const reservaciones = reservacionesDB.docs.map((reservacion) => ({
       id: reservacion.id,
       ...reservacion.data(),
       
   }));   
   
+  
 
-  for ( let i = 0; i < reservaciones.length; i++ ) {
- 
-    document.getElementById("cuerpoTabla").innerHTML +=`<tr class="registros" id="${reservaciones[i].id}" 
-    onmouseover="cambiar_color_over('${reservaciones[i].id}')"  onmouseout="cambiar_color_out('${reservaciones[i].id}')">
-      <td ><a href="onclick:editarReservacion()">${reservaciones[i].localizador}</a></td>
+   for ( let i = 0; i < reservaciones.length; i++ ) {
+
+    document.getElementById("cuerpoTabla").innerHTML +=`<tr class="registros" 
+      id="${reservaciones[i].id}" 
+      onmouseover="cambiar_color_over('${reservaciones[i].id}')"  
+      onmouseout="cambiar_color_out('${reservaciones[i].id}')">
+      
+      <td >${reservaciones[i].localizador}</td>
       <td>${reservaciones[i].fecha}</td>
       <td>${reservaciones[i].hora}</td>
+      
       <td>
       <a href="#">
-      <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación">
-      </a>
+      <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación" onclick="actualizarReservacion()"></a>
 
       <a href="#">
       <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación"></a>
       </td>
       </tr>`;
 
-    console.log(reservaciones[i].localizador);
-  }
-  
+     console.log(reservaciones[i].localizador);
+   } 
   
 };   
 
@@ -305,8 +308,9 @@ const obtenerReservaciones = async () =>{
            
               </form>
               <div> 
-              <input type="button" value="Actualizar" className="botones_formularios" onClick={recargarPagina} />
+              <input type="button" value="Actualizar" className="botones_formularios" onClick={obtenerReservaciones} />
               </div>
+                           
               <table>
                 <thead>
                   <tr>
