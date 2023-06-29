@@ -1,7 +1,7 @@
 /************ IMPORTANDO IMAGENES **************************/
 import image_reservaciones from "../img/reservaciones.jpg";
 import image_logo_tarjetas from "../img/logo_tarjetas.png";
-import image_actualizar_reservacion from "../img/actualizar.png";
+//import image_actualizar_reservacion from "../img/actualizar.png";
 import image_editar_reservacion from "../img/editar.png";
 import image_eliminar_reservacion from "../img/eliminar.png";
 
@@ -18,14 +18,188 @@ import {collection, addDoc, getDocs} from "firebase/firestore";
 
 const Reservaciones = () => {
  
+  
+  const validarDatos = () =>{
+    
+
+    if(document.getElementById("nombreInput").value==""){
+        limpiarMensajesError();
+        document.getElementById("mensaje_nombre").style.display = "inline";
+        document.getElementById("nombreInput").focus();
+ 
+    } 
+     
+     else if(document.getElementById("apellidoInput").value==""){
+        limpiarMensajesError();
+        document.getElementById("mensaje_apellido").style.display = "inline";
+        document.getElementById("apellidoInput").focus();
+    }
+          
+     else if(document.getElementById("n_personasInput").value=="0"){
+        limpiarMensajesError();
+        document.getElementById("mensaje_n_personas").style.display = "inline";
+        document.getElementById("n_personasInput").focus();
+    }
+
+     else if(document.getElementById("fechaInput").value==""){
+        limpiarMensajesError();
+        document.getElementById("mensaje_fecha").style.display = "inline";
+        document.getElementById("fechaInput").focus(); 
+    }
+
+     else if(document.getElementById("horaInput").value==""){
+        limpiarMensajesError();
+        document.getElementById("mensaje_hora").style.display = "inline";
+        document.getElementById("horaInput").focus(); 
+    }
+     else if(document.getElementById("detallesInput").value==""){
+        limpiarMensajesError();
+        document.getElementById("mensaje_detalles").style.display = "inline";
+        document.getElementById("detallesInput").focus();         
+    }
+     else if(document.getElementById("tipoTarjetaInput").value=="SELECCIONE"){
+        limpiarMensajesError();
+        document.getElementById("mensaje_tipo_tarjeta").style.display = "inline";
+        document.getElementById("tipoTarjetaInput").focus(); 
+    }
+     else if(document.getElementById("numeroTarjetaInput").value==""){
+        limpiarMensajesError();
+        document.getElementById("mensaje_numeroTarjeta").style.display = "inline";
+        document.getElementById("numeroTarjetaInput").focus();
+    }
+     else if(document.getElementById("fechaVencimientoTarjetaInput").value==""){
+        limpiarMensajesError();
+        document.getElementById("mensaje_fechaVencimientoTarjeta").style.display = "inline";
+        document.getElementById("fechaVencimientoTarjetaInput").focus();
+    }
+     else{
+        generarLocalizador();
+        crearReservacion();
+        alert("Se creo la reservacion con exito, con el número de localizador ( "+ 
+              document.getElementById("localizadorInput").value +" ) ");
+        limpiarMensajesError();
+        limpiarDatos();
+        
+    }
+     
+};
+
+const limpiarMensajesError = () =>{
+
+        document.getElementById("mensaje_nombre").style.display = "none";
+        document.getElementById("mensaje_apellido").style.display = "none";
+        document.getElementById("mensaje_n_personas").style.display = "none";
+        document.getElementById("mensaje_fecha").style.display = "none";
+        document.getElementById("mensaje_hora").style.display = "none";
+        document.getElementById("mensaje_detalles").style.display = "none";
+        document.getElementById("mensaje_tipo_tarjeta").style.display = "none";
+        document.getElementById("mensaje_numeroTarjeta").style.display = "none";
+        document.getElementById("mensaje_fechaVencimientoTarjeta").style.display = "none";
+
+};
+
+const generarLocalizador = () =>{
+  document.getElementById("localizadorInput").value = document.getElementById("fechaInput").value +"-"+ 
+                                                      document.getElementById("nombreInput").value.toUpperCase().substring(0, 1)+
+                                                      document.getElementById("apellidoInput").value.toUpperCase().substring(0, 1);
+  
+};
+
+
+const limpiarDatos = () =>{
+  document.getElementById("localizadorInput").value="";
+  document.getElementById("nombreInput").value="";
+  document.getElementById("apellidoInput").value="";
+  document.getElementById("n_personasInput").value="0";
+  document.getElementById("fechaInput").value="";
+  document.getElementById("horaInput").value="";
+  document.getElementById("detallesInput").value="";
+  document.getElementById("tipoTarjetaInput").value="SELECCIONE";
+  document.getElementById("numeroTarjetaInput").value="";
+  document.getElementById("fechaVencimientoTarjetaInput").value="";
+};
+
+const crearReservacion = async () =>{
+
+  const reservacion = {
+      localizador:          document.getElementById("localizadorInput").value.toUpperCase(),
+      nombre:               document.getElementById("nombreInput").value.toUpperCase(),
+      apellido:             document.getElementById("apellidoInput").value.toUpperCase(),
+      n_personas:           document.getElementById("n_personasInput").value.toUpperCase(),
+      fecha:                document.getElementById("fechaInput").value.toUpperCase(),
+      hora:                 document.getElementById("horaInput").value.toUpperCase(),
+      detalles:             document.getElementById("detallesInput").value.toUpperCase(),
+      tipo_tarjeta:         document.getElementById("tipoTarjetaInput").value.toUpperCase(),
+      numero_tarjeta:       document.getElementById("numeroTarjetaInput").value.toUpperCase(),
+      fecha_vence_tarjeta:  document.getElementById("fechaVencimientoTarjetaInput").value.toUpperCase(),
+
+  };
+
+  const coleccionReservaciones = collection(db, "Reservaciones");
+  await addDoc(coleccionReservaciones, reservacion);
+  recargarPagina();
+  await obtenerReservaciones();
+
+};
+
+const recargarPagina = () =>{
+
+            location.reload();
+
+};
+
+
+const obtenerReservaciones = async () =>{
+
+  const coleccionReservaciones = collection(db, "Reservaciones");
+  const reservacionesDB = await getDocs(coleccionReservaciones);
+  const reservaciones = reservacionesDB.docs.map((reservacion) => ({
+      id: reservacion.id,
+      ...reservacion.data(),
+      
+  }));   
+  
+
+  for ( let i = 0; i < reservaciones.length; i++ ) {
+ 
+    document.getElementById("cuerpoTabla").innerHTML +=`<tr class="registros" id="${reservaciones[i].id}" 
+    onmouseover="cambiar_color_over('${reservaciones[i].id}')"  onmouseout="cambiar_color_out('${reservaciones[i].id}')">
+      <td ><a href="onclick:editarReservacion()">${reservaciones[i].localizador}</a></td>
+      <td>${reservaciones[i].fecha}</td>
+      <td>${reservaciones[i].hora}</td>
+      <td>
+      <a href="#">
+      <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación">
+      </a>
+
+      <a href="#">
+      <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación"></a>
+      </td>
+      </tr>`;
+
+    console.log(reservaciones[i].localizador);
+  }
+  
+  
+};   
+
+
+// const editarReservacion = () =>{
+
+//     document.getElementById("localizadorInput").value="UYUYUY";
+// };
+
+// const actualizarReservacion =  () =>{
+ 
+//      console.log("actualizar");
+// };
+
     return (
 
       <>
       <Header />
         <main className="row" >
           <article className="col">
-          
-
           
             <span className="tituloPagina">Reservaciones</span>
             <img id="menu" src={image_reservaciones} height="54" width="54" />
@@ -157,204 +331,7 @@ const Reservaciones = () => {
   };
 
 
-const validarDatos = () =>{
-  
-    if(document.getElementById("nombreInput").value==""){
-        limpiarMensajesError();
-        mensaje_nombre.style.display = "inline";
-        document.getElementById("nombreInput").focus();
-        return false; 
-     } 
-     
-     else if(document.getElementById("apellidoInput").value==""){
-        limpiarMensajesError();
-        mensaje_apellido.style.display = "inline";
-        document.getElementById("apellidoInput").focus();
-        return false; 
-     }
-          
-     else if(document.getElementById("n_personasInput").value=="0"){
-        limpiarMensajesError();
-        mensaje_n_personas.style.display = "inline";
-        document.getElementById("n_personasInput").focus();
-        return false; 
-     }
-
-     else if(document.getElementById("fechaInput").value==""){
-        limpiarMensajesError();
-        mensaje_fecha.style.display = "inline";
-        document.getElementById("fechaInput").focus();
-        return false; 
-     }
-
-     else if(document.getElementById("horaInput").value==""){
-        limpiarMensajesError();
-        mensaje_hora.style.display = "inline";
-        document.getElementById("horaInput").focus();
-        return false; 
-     }
-     else if(document.getElementById("detallesInput").value==""){
-        limpiarMensajesError();
-        mensaje_detalles.style.display = "inline";
-        document.getElementById("detallesInput").focus();
-        return false; 
-     }
-     else if(document.getElementById("tipoTarjetaInput").value==""){
-      limpiarMensajesError();
-      mensaje_tipo_tarjeta.style.display = "inline";
-      document.getElementById("tipoTarjetaInput").focus();
-      return false; 
-   }
-   else if(document.getElementById("tipoTarjetaInput").value=="SELECCIONE"){
-    limpiarMensajesError();
-    mensaje_tipo_tarjeta.style.display = "inline";
-    document.getElementById("tipoTarjetaInput").focus();
-    return false; 
- }
-
-   else if(document.getElementById("numeroTarjetaInput").value==""){
-   limpiarMensajesError();
-   mensaje_numeroTarjeta.style.display = "inline";
-   document.getElementById("numeroTarjetaInput").focus();
-   return false; 
- }
-   else if(document.getElementById("fechaVencimientoTarjetaInput").value==""){
-   limpiarMensajesError();
-   mensaje_fechaVencimientoTarjeta.style.display = "inline";
-   document.getElementById("fechaVencimientoTarjetaInput").focus();
-   return false; 
- }
-     else{
-        generarLocalizador();
-        crearReservacion();
-        alert("Se creo la reservacion con exito, con el número de localizador ( "+ 
-              document.getElementById("localizadorInput").value +" ) ");
-        limpiarMensajesError();
-        limpiarDatos();
-        
-     }
-     
-};
-
-const limpiarMensajesError = () =>{
-
-    mensaje_nombre.style.display = "none";
-    mensaje_apellido.style.display = "none";
-    mensaje_n_personas.style.display = "none";
-    mensaje_fecha.style.display = "none";
-    mensaje_hora.style.display = "none";
-    mensaje_detalles.style.display = "none";
-    mensaje_tipo_tarjeta.style.display = "none";
-    mensaje_numeroTarjeta.style.display = "none";
-    mensaje_fechaVencimientoTarjeta.style.display = "none";
-};
-
-
-const generarLocalizador = () =>{
-    document.getElementById("localizadorInput").value = document.getElementById("fechaInput").value +"-"+ 
-                                                        document.getElementById("nombreInput").value.toUpperCase().substring(0, 1)+
-                                                        document.getElementById("apellidoInput").value.toUpperCase().substring(0, 1);
-    
-};
-
-
-const limpiarDatos = () =>{
-    document.getElementById("localizadorInput").value="";
-    document.getElementById("nombreInput").value="";
-    document.getElementById("apellidoInput").value="";
-    document.getElementById("n_personasInput").value="0";
-    document.getElementById("fechaInput").value="";
-    document.getElementById("horaInput").value="";
-    document.getElementById("detallesInput").value="";
-    document.getElementById("tipoTarjetaInput").value="Seleccione";
-    document.getElementById("numeroTarjetaInput").value="";
-    document.getElementById("fechaVencimientoTarjetaInput").value="";
-};
-
-
-const crearReservacion = async () =>{
-
-    const reservacion = {
-        localizador:          document.getElementById("localizadorInput").value.toUpperCase(),
-        nombre:               document.getElementById("nombreInput").value.toUpperCase(),
-        apellido:             document.getElementById("apellidoInput").value.toUpperCase(),
-        n_personas:           document.getElementById("n_personasInput").value.toUpperCase(),
-        fecha:                document.getElementById("fechaInput").value.toUpperCase(),
-        hora:                 document.getElementById("horaInput").value.toUpperCase(),
-        detalles:             document.getElementById("detallesInput").value.toUpperCase(),
-        tipo_tarjeta:         document.getElementById("tipoTarjetaInput").value.toUpperCase(),
-        numero_tarjeta:       document.getElementById("numeroTarjetaInput").value.toUpperCase(),
-        fecha_vence_tarjeta:  document.getElementById("fechaVencimientoTarjetaInput").value.toUpperCase(),
-
-    };
-
-    const coleccionReservaciones = collection(db, "Reservaciones");
-    await addDoc(coleccionReservaciones, reservacion);
-    recargarPagina();
-    await obtenerReservaciones();
-
-};
-
-const recargarPagina = () =>{
- 
-              location.reload();
-
-};
-
-
-const obtenerReservaciones = async () =>{
-
-    const coleccionReservaciones = collection(db, "Reservaciones");
-    const reservacionesDB = await getDocs(coleccionReservaciones);
-    const reservaciones = reservacionesDB.docs.map((reservacion) => ({
-        id: reservacion.id,
-        ...reservacion.data(),
-        
-    }));   
-    
-
-    for ( let i = 0; i < reservaciones.length; i++ ) {
-
-      document.getElementById("cuerpoTabla").innerHTML +=`<tr class="registros" id="${reservaciones[i].id}" 
-      onmouseover="cambiar_color_over('${reservaciones[i].id}')"  onmouseout="cambiar_color_out('${reservaciones[i].id}')">
-        <td ><a href="onclick:editarReservacion()">${reservaciones[i].localizador}</a></td>
-        <td>${reservaciones[i].fecha}</td>
-        <td>${reservaciones[i].hora}</td>
-        <td>
-        <a href="onclick:editarReservacion()" >
-        <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación">
-        </a>
-
-        <a href="#">
-        <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación"></a>
-        </td>
-        </tr>`;
-
-      console.log(reservaciones[i].localizador);
-    }
-    
-    
-
-    // for ( let i = 0; i < reservaciones.length; i++ ) {
-    //   reservaciones.shift();
-    // } 
-    
-  };   
- 
-
-const editarReservacion = () =>{
-    document.getElementById("localizadorInput").value="UYUYUY";
-};
-
-  const actualizarReservacion =  () =>{
-    
-
-    console.log("actualizar");
-};
-
-
-//await obtenerReservaciones();
 
 export default Reservaciones;
 
-window.addEventListener("load",obtenerReservaciones());
+window.addEventListener("load", Reservaciones.obtenerReservaciones);
