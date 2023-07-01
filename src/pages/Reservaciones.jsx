@@ -1,7 +1,8 @@
 /************ IMPORTANDO IMAGENES **************************/
 import image_reservaciones from "../img/reservaciones.jpg";
 import image_logo_tarjetas from "../img/logo_tarjetas.png";
-//import image_actualizar_reservacion from "../img/actualizar.png";
+import image_refrescar_registros_on from "../img/refrescarOn.jpg";
+import image_refrescar_registros_off from "../img/refrescarOff.jpg";
 import image_editar_reservacion from "../img/editar.png";
 import image_eliminar_reservacion from "../img/eliminar.png";
 
@@ -9,11 +10,13 @@ import image_eliminar_reservacion from "../img/eliminar.png";
 /*********** IMPORTANDO COMPONENTES ************************/
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
+import cambiarImagenOn from "../components/reloadIMG"
+import cambiarImagenOff from "../components/reloadIMG"
 
 /*********** IMPORTANDO BASE DE DATOS **********************/
 import {db} from "../firebase/firebase";
-import {collection, addDoc, getDocs} from "firebase/firestore";
+import {collection, addDoc, getDocs, doc, updateDoc} from "firebase/firestore";
+
 
 
 const Reservaciones = () => {
@@ -137,16 +140,15 @@ const crearReservacion = async () =>{
 
   const coleccionReservaciones = collection(db, "Reservaciones");
   await addDoc(coleccionReservaciones, reservacion);
-  //recargarPagina();
   await obtenerReservaciones();
 
 };
 
-const recargarPagina = () =>{
+// const recargarPagina = () =>{
 
-            location.reload();
+//             location.reload();
 
-};
+// };
 
 
 const obtenerReservaciones = async () =>{
@@ -159,7 +161,7 @@ const obtenerReservaciones = async () =>{
       
   }));   
   
-  
+  document.getElementById("cuerpoTabla").innerHTML = "";
 
    for ( let i = 0; i < reservaciones.length; i++ ) {
 
@@ -173,8 +175,9 @@ const obtenerReservaciones = async () =>{
       <td>${reservaciones[i].hora}</td>
       
       <td>
+      <input type="button" value="Editar" class="botones_formularios" onClick={editarReservacion('XCRZ7Zurac35CydqJgaY')}  />
       <a href="#">
-      <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación" onclick="actualizarReservacion()"></a>
+      <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación" onClick={editarReservacion('XCRZ7Zurac35CydqJgaY')}></a>
 
       <a href="#">
       <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación"></a>
@@ -187,15 +190,40 @@ const obtenerReservaciones = async () =>{
 };   
 
 
-// const editarReservacion = () =>{
 
-//     document.getElementById("localizadorInput").value="UYUYUY";
-// };
 
-// const actualizarReservacion =  () =>{
+
+const editarReservacion =  (id) =>{
+
+
+  alert(id);  
+
+  const coleccion = doc(db, "Reservaciones", id);
+  alert(coleccion.localizador);
+  //XCRZ7Zurac35CydqJgaY
+  console.log(id);
+
+    document.getElementById("localizadorInput").value=coleccion.localizador;
+    document.getElementById("nombreInput").value=coleccion.nombre;
+    document.getElementById("apellidoInput").value=coleccion.apellido;
+    document.getElementById("n_personasInput").value=coleccion.n_personas;
+    document.getElementById("fechaInput").value=coleccion.fecha;
+    document.getElementById("horaInput").value=coleccion.hora;
+    document.getElementById("detallesInput").value=coleccion.detalles;
+    document.getElementById("tipoTarjetaInput").value=coleccion.tipo_tarjeta;
+    document.getElementById("numeroTarjetaInput").value=coleccion.numero_tarjeta;
+    document.getElementById("fechaVencimientoTarjetaInput").value=coleccion.fecha_vence_tarjeta;
+
+};
+
+
+const actualizarReservacion = async  (id) =>{
+    const coleccion = doc(db, "Reservaciones", id);
+    await updateDoc(coleccion,reservacion);
+    await obtenerReservaciones(); 
  
-//      console.log("actualizar");
-// };
+
+};
 
     return (
 
@@ -307,8 +335,22 @@ const obtenerReservaciones = async () =>{
                     <input type="button" value="Enviar" className="botones_formularios" onClick={validarDatos} />
            
               </form>
-              <div> 
-              <input type="button" value="Actualizar" className="botones_formularios" onClick={obtenerReservaciones} />
+              <div > 
+               
+              <a href="#" 
+              onMouseOver={() => cambiarImagenOn('refrescar',image_refrescar_registros_on)}
+              onMouseOut={() => cambiarImagenOff('refrescar',image_refrescar_registros_off)}
+              onClick={obtenerReservaciones}>
+              
+              <img src={image_refrescar_registros_off}  
+                id="refrescar"
+                height="56" 
+                width="56" 
+                border="0" 
+                alt="Refrescar Registros"></img>
+                <br />Refrescar registros
+                </a>
+             
               </div>
                            
               <table>
@@ -333,9 +375,14 @@ const obtenerReservaciones = async () =>{
       </>      
     );   
   };
+  
 
+ 
 
+  //{await Reservaciones.editarReservacion('XCRZ7Zurac35CydqJgaY')}
+ 
+ {await Reservaciones.obtenerReservaciones}
 
 export default Reservaciones;
 
-window.addEventListener("load", Reservaciones.obtenerReservaciones);
+window.addEventListener("load",await Reservaciones.obtenerReservaciones);

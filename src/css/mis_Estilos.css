@@ -121,12 +121,22 @@ background-color: rgb(98, 76, 61);
 
 .registros{
 
-    background-color: rgb(242, 200, 144);
+    background-color: rgb(243, 189, 120);
+    text-align: center;
+    color:rgb(79, 41, 4);
+    border: 2px rgb(79, 41, 4);
+    /* border-collapse:collapse; */
+    border-color: rgb(79, 41, 4);
+    border-style: solid;
+
+}
+
+
+.texto_link_table{
     text-align: center;
     color:rgb(101, 53, 5);
-    border: 2px rgb(101, 53, 5);; 
-    border-collapse: separate;
-    border-color: rgb(20, 19, 19);
+    
+
 }
 
 .imagenes_registro{
