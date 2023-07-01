@@ -10,8 +10,8 @@ import image_eliminar_reservacion from "../img/eliminar.png";
 /*********** IMPORTANDO COMPONENTES ************************/
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import cambiarImagenOn from "../components/reloadIMG"
-import cambiarImagenOff from "../components/reloadIMG"
+//import cambiarImagenOn from "../components/reloadIMG"
+//import cambiarImagenOff from "../components/reloadIMG"
 
 /*********** IMPORTANDO BASE DE DATOS **********************/
 import {db} from "../firebase/firebase";
@@ -225,7 +225,22 @@ const actualizarReservacion = async  (id) =>{
 
 };
 
-    return (
+
+ //************CAMBIANDO IMAGEN PRINCIPAL CUANDO TIENE EL FOCO ***************/
+  const cambiarImagenOn = (id,img) =>{
+            
+    document.getElementById(id).src=img;
+ };
+
+//************CAMBIANDO IMAGEN PRINCIPAL CUANDO PIERDE EL FOCO ***************/
+const cambiarImagenOff = (id,img) =>{
+          
+  document.getElementById(id).src=img;
+};
+
+
+
+return (
 
       <>
       <Header />

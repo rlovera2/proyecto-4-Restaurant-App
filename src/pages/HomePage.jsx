@@ -13,11 +13,12 @@ import image_map from "../img/map.png"
 //************** IMPORTANDO COMPONENTES *******************//
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import cambiarImagenOn from "../components/reloadIMG"
-import cambiarImagenOff from "../components/reloadIMG"
+//import cambiarImagenOn from "../components/reloadIMG"
+//import cambiarImagenOff from "../components/reloadIMG"
 
 
 const HomePage = () => {
+
 
     //************CAMBIANDO IMAGEN PRINCIPAL CUANDO TIENE EL FOCO ***************/
     const cambiarImagenOn = (id,img) =>{
@@ -30,7 +31,9 @@ const HomePage = () => {
             
     document.getElementById(id).src=img;
  };
-    return (
+   
+ 
+ return (
       <>
       <Header />
         <main className="row">
