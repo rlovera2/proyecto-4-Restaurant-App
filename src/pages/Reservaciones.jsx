@@ -166,7 +166,7 @@ const obtenerReservaciones = async () =>{
   for ( let i = 0; i < reservaciones.length; i++ ) {
 
    document.getElementById("cuerpoTabla").innerHTML +=`<tr class="registros" 
-     id=`+ reservaciones[i].id + ` 
+     id="${reservaciones[i].id}"   
      onmouseover="cambiar_color_over('${reservaciones[i].id}')"  
      onmouseout="cambiar_color_out('${reservaciones[i].id}')">
      
@@ -177,14 +177,14 @@ const obtenerReservaciones = async () =>{
      <td>
      <input type="button" value="Editar" class="botones_formularios" onClick="editarReservacion(id)"  />
      <a href="#">
-     <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación"  onClick={editarReservacion('hola')}></a>
+     <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación"  onClick={editarReservacion('hola')} /></a>
 
      <a href="#">
      <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación"></a>
      </td>
      </tr>`;
 
-    console.log(reservaciones[i].localizador);
+    console.log(reservaciones[i].id);
   } 
       
    
