@@ -11,6 +11,7 @@ import image_whatsapp from "../img/whatsapp.jpg";
 import image_map from "../img/map.png"
 
 //************** IMPORTANDO COMPONENTES *******************//
+//import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 //import cambiarImagenOn from "../components/reloadIMG"

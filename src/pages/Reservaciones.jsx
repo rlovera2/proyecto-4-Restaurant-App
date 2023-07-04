@@ -8,6 +8,8 @@ import image_eliminar_reservacion from "../img/eliminar.png";
 
 
 /*********** IMPORTANDO COMPONENTES ************************/
+import React, {useState} from "react";
+import {useEffect} from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 //import cambiarImagenOn from "../components/reloadIMG"
@@ -19,7 +21,8 @@ import {collection, addDoc, getDocs, doc, updateDoc} from "firebase/firestore";
 
 
 
-const Reservaciones = () => {
+
+const Reservaciones = (props) => {
  
   
   const validarDatos = () =>{
@@ -76,12 +79,12 @@ const Reservaciones = () => {
         document.getElementById("fechaVencimientoTarjetaInput").focus();
     }
      else{
-        generarLocalizador();
         crearReservacion();
         alert("Se creo la reservacion con exito, con el número de localizador ( "+ 
               document.getElementById("localizadorInput").value +" ) ");
         limpiarMensajesError();
         limpiarDatos();
+        
         
     }
      
@@ -123,18 +126,20 @@ const limpiarDatos = () =>{
 };
 
 const crearReservacion = async () =>{
-
+  
+  values.localizador=document.getElementById("localizadorInput").value;
+  
   const reservacion = {
-      localizador:          document.getElementById("localizadorInput").value.toUpperCase(),
-      nombre:               document.getElementById("nombreInput").value.toUpperCase(),
-      apellido:             document.getElementById("apellidoInput").value.toUpperCase(),
-      n_personas:           document.getElementById("n_personasInput").value.toUpperCase(),
-      fecha:                document.getElementById("fechaInput").value.toUpperCase(),
-      hora:                 document.getElementById("horaInput").value.toUpperCase(),
-      detalles:             document.getElementById("detallesInput").value.toUpperCase(),
-      tipo_tarjeta:         document.getElementById("tipoTarjetaInput").value.toUpperCase(),
-      numero_tarjeta:       document.getElementById("numeroTarjetaInput").value.toUpperCase(),
-      fecha_vence_tarjeta:  document.getElementById("fechaVencimientoTarjetaInput").value.toUpperCase(),
+      localizador:          values.localizador.toUpperCase(),
+      nombre:               values.nombreInput.toUpperCase(),
+      apellido:             values.apellidoInput.toUpperCase(),
+      n_personas:           values.n_personasInput,
+      fecha:                values.fechaInput,
+      hora:                 values.horaInput,
+      detalles:             values.detallesInput.toUpperCase(),
+      tipo_tarjeta:         values.tipoTarjetaInput.toUpperCase(),
+      numero_tarjeta:       values.numeroTarjetaInput,
+      fecha_vence_tarjeta:  values.fechaVencimientoTarjetaInput
 
   };
 
@@ -143,12 +148,6 @@ const crearReservacion = async () =>{
   await obtenerReservaciones();
 
 };
-
-// const recargarPagina = () =>{
-
-//             location.reload();
-
-// };
 
 
 const obtenerReservaciones = async () =>{
@@ -159,48 +158,55 @@ const obtenerReservaciones = async () =>{
       id: reservacion.id,
       ...reservacion.data(),
       
-  }));   
+  })); 
+  
   
   document.getElementById("cuerpoTabla").innerHTML = "";
 
-   for ( let i = 0; i < reservaciones.length; i++ ) {
+  for ( let i = 0; i < reservaciones.length; i++ ) {
 
-    document.getElementById("cuerpoTabla").innerHTML +=`<tr class="registros" 
-      id="${reservaciones[i].id}" 
-      onmouseover="cambiar_color_over('${reservaciones[i].id}')"  
-      onmouseout="cambiar_color_out('${reservaciones[i].id}')">
+   document.getElementById("cuerpoTabla").innerHTML +=`<tr class="registros" 
+     id=`+ reservaciones[i].id + ` 
+     onmouseover="cambiar_color_over('${reservaciones[i].id}')"  
+     onmouseout="cambiar_color_out('${reservaciones[i].id}')">
+     
+     <td >${reservaciones[i].localizador}</td>
+     <td>${reservaciones[i].fecha}</td>
+     <td>${reservaciones[i].hora}</td>
+     
+     <td>
+     <input type="button" value="Editar" class="botones_formularios" onClick="editarReservacion(id)"  />
+     <a href="#">
+     <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación"  onClick={editarReservacion('hola')}></a>
+
+     <a href="#">
+     <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación"></a>
+     </td>
+     </tr>`;
+
+    console.log(reservaciones[i].localizador);
+  } 
       
-      <td >${reservaciones[i].localizador}</td>
-      <td>${reservaciones[i].fecha}</td>
-      <td>${reservaciones[i].hora}</td>
-      
-      <td>
-      <input type="button" value="Editar" class="botones_formularios" onClick={editarReservacion('XCRZ7Zurac35CydqJgaY')}  />
-      <a href="#">
-      <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación" onClick={editarReservacion('XCRZ7Zurac35CydqJgaY')}></a>
-
-      <a href="#">
-      <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación"></a>
-      </td>
-      </tr>`;
-
-     console.log(reservaciones[i].localizador);
-   } 
-  
+   
 };   
 
 
+useEffect(() => {
 
+  obtenerReservaciones();
+//  console.log(obtenerReservaciones().reservacion.id);
+
+},[]);
 
 
 const editarReservacion =  (id) =>{
 
-
   alert(id);  
 
   const coleccion = doc(db, "Reservaciones", id);
+  
   alert(coleccion.localizador);
-  //XCRZ7Zurac35CydqJgaY
+  
   console.log(id);
 
     document.getElementById("localizadorInput").value=coleccion.localizador;
@@ -217,13 +223,13 @@ const editarReservacion =  (id) =>{
 };
 
 
-const actualizarReservacion = async  (id) =>{
-    const coleccion = doc(db, "Reservaciones", id);
-    await updateDoc(coleccion,reservacion);
-    await obtenerReservaciones(); 
+// const actualizarReservacion = async  (id) =>{
+//     const coleccion = doc(db, "Reservaciones", id);
+//     await updateDoc(coleccion,reservacion);
+//     await obtenerReservaciones(); 
  
 
-};
+// };
 
 
  //************CAMBIANDO IMAGEN PRINCIPAL CUANDO TIENE EL FOCO ***************/
@@ -239,6 +245,57 @@ const cambiarImagenOff = (id,img) =>{
 };
 
 
+const estadoInicialValores ={
+    localizador: '',
+    nombre: '',
+    apellido: '',
+    n_personas: '',
+    fecha: '',
+    hora: '',
+    detalles: '',
+    tipo_tarjeta: '',
+    numero_tarjeta: '',
+    fecha_vence_tarjeta: ''
+};
+
+
+const [values, setValues] = useState(estadoInicialValores);
+
+const handleInputChange = (e) => {
+  const{ id, value } = e.target;
+  setValues({...values,[id]: value})
+  
+  
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+   //console.log(values);
+  //props.addOrEditReservacion(values);
+  
+
+};  
+
+// const addOrEditReservacion = async (reservacionObjeto) =>{
+    
+//   await db.collection('Reservacion').doc().set(reservacionObjeto)
+
+// };
+
+const limpiarHoraInput = () =>{
+  document.getElementById("horaInput").value="";
+
+};
+
+const print = () => {
+
+  //console.log(values);
+//  values.localizador=document.getElementById("localizadorInput").value;
+
+  console.log(values);
+
+}
+
 
 return (
 
@@ -246,36 +303,40 @@ return (
       <Header />
         <main className="row" >
           <article className="col">
-          
+          <br />
             <span className="tituloPagina">Reservaciones</span>
             <img id="menu" src={image_reservaciones} height="54" width="54" />
      
             <p>Por favor ingrese los datos para crear una nueva reservaci&oacute;n. </p>
             
             <div className="contenedor_reservaciones">
-              <form>
+              <form onSubmit={handleSubmit}>
                 
                 {/* LOCALIZADOR */}
 
                    <label htmlFor="localizadorInput" className="etiquetas">Localizador</label>
-                   <input type="text" className="campos" id="localizadorInput" autoComplete="off" disabled />
+                   <input type="text" className="campos" 
+                   id="localizadorInput" name="localizadorInput" autoComplete="off" 
+                    disabled />
       
                 {/* NOMBRE */}
                         
                    <label htmlFor="nombreInput" className="etiquetas">Nombre</label>
-                   <input type="text" className="campos" id="nombreInput" autoComplete="off" />
+                   <input type="text" className="campos" id="nombreInput" 
+                    autoComplete="off" onChange={handleInputChange} />
                    <div id="mensaje_nombre" className="mensaje">Por favor ingrese un nombre valido, gracias</div>
                 
                 {/* APELLIDO */}
 
                    <label htmlFor="apellidoInput" className="etiquetas">&nbsp;Apellido</label>
-                   <input type="text" className="campos" id="apellidoInput" autoComplete="off" />
+                   <input type="text" className="campos" id="apellidoInput"  
+                   autoComplete="off" onChange={handleInputChange} />
                    <div id="mensaje_apellido" className="mensaje">Por favor ingrese un apellido valido, gracias</div>
               
                 {/* NUMERO DE PERSONAS */}
 
                    <label htmlFor="n_personasInput" className="etiquetas">&nbsp;N&uacute;mero de Personas</label>
-                   <select id="n_personasInput" className="campos" onClick={generarLocalizador}>
+                   <select id="n_personasInput"  className="campos" onChange={handleInputChange} >
                       <option value="0">0</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -303,27 +364,34 @@ return (
                 {/* FECHA */}
                         
                     <label htmlFor="fechaInput" className="etiquetas">&nbsp;Fecha</label>
-                    <input type="date" id="fechaInput" name="fechaInput"  min="2023-01-01" max="2023-12-31" className="campos" />
+                    <input type="date" id="fechaInput"   min="2023-01-01" max="2023-12-31" className="campos" 
+                    onChange={handleInputChange} onClick={limpiarHoraInput} />
                     <div id="mensaje_fecha" className="mensaje">Por favor selecione una fecha valida,<br /> gracias</div>
 
                 {/* HORA */}
           
                     <label htmlFor="horaInput" className="etiquetas">&nbsp;Hora</label>
-                    <input type="time" id="horaInput" name="horaInput" min="12:00" max="20:00" required className="campos" />
-                    <div id="mensaje_hora" className="mensaje">Por favor selecione una hora valida,<br /> gracias</div>
+                    <input type="time" id="horaInput"  min="12:00" max="20:00" className="campos" 
+                    onClick={generarLocalizador} onChange={handleInputChange} />
+                    <div id="mensaje_hora" className="mensaje">Por favor selecione una hora valida, entre<br />
+                                                               las 12:00 pm y las 08:00 pm gracias</div>
           
                 {/* DETALLES */}
 
                     <label htmlFor="detallesInput" className="etiquetas">&nbsp;Detalles</label>
-                    <textarea id="detallesInput" className="campos"></textarea>
+                    <textarea 
+                    id="detallesInput"  
+                    className="campos" 
+                    placeholder="Especifique en breves palabras algún detalle a considerar." 
+                    onChange={handleInputChange}></textarea>
                     <div id="mensaje_detalles" className="mensaje">Por favor ingrese un detalle, gracias</div>
 
                 {/* TIPO DE TARJETA */}
 
                     <label htmlFor="tipoTarjetaInput" className="etiquetas">&nbsp;Tipo de Tarjeta</label>
-                    <img id="logoTarjetas" src={image_logo_tarjetas} height="30" width="88" />
+                    <img id="logoTarjetas" name="logoTarjetas" src={image_logo_tarjetas} height="30" width="88" />
 
-                    <select id="tipoTarjetaInput" className="campos">
+                    <select id="tipoTarjetaInput"  className="campos" onChange={handleInputChange}>
                       <option value="SELECCIONE">SELECCIONE</option>
                       <option value="DEBIT-MASTER">DEBIT-MASTER</option>
                       <option value="DEBIT-VISA">DEBIT-VISA</option>
@@ -335,20 +403,26 @@ return (
                 {/* NUMERO DE TARJETA */}
 
                     <label htmlFor="numeroTarjetaInput" className="etiquetas">&nbsp;N&uacute;mero de Tarjeta</label>
-                    <input type="number" id="numeroTarjetaInput" className="campos" />
+                    <input type="number" id="numeroTarjetaInput"  className="campos"  
+                    onChange={handleInputChange} />
                     <div id="mensaje_numeroTarjeta" className="mensaje">Por favor ingrese un n&uacute;mero de tarjeta valido,<br /> gracias</div>
                 
                 {/* FECHA DE VENCIMIENTO DE TARJETA */}
                       
                     <label htmlFor="fechaVencimientoTarjetaInput" className="etiquetas">&nbsp;Fecha de vencimiento de la Tarjeta</label>
-                    <input type="date" id="fechaVencimientoTarjetaInput"  min="2023-01-01" max="2023-12-31" className="campos" />
+                    <input type="date" id="fechaVencimientoTarjetaInput"   
+                    min="2023-01-01" 
+                    max="2023-12-31" 
+                    className="campos" 
+                    onChange={handleInputChange} />
                     <div id="mensaje_fechaVencimientoTarjeta" className="mensaje">Por favor selecione una fecha valida,<br /> gracias</div>
            
                     <br />
 
                     <input type="reset" value="Limpiar Datos" className="botones_formularios" />&nbsp; 
-                    <input type="button" value="Enviar" className="botones_formularios" onClick={validarDatos} />
-           
+                    <input type="submit" value="Enviar" className="botones_formularios" onClick={validarDatos} />
+                    <input type="button" value="Enviar2" className="botones_formularios" onClick={print} />
+                  
               </form>
               <div > 
                
