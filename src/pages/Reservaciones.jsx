@@ -17,14 +17,20 @@ import Footer from "../components/Footer";
 
 /*********** IMPORTANDO BASE DE DATOS **********************/
 import {db} from "../firebase/firebase";
-import {collection, addDoc, getDocs, doc, updateDoc} from "firebase/firestore";
+import {collection, addDoc, getDocs, doc, updateDoc, deleteDoc} from "firebase/firestore";
 
 
 
 
-const Reservaciones = (props) => {
- 
+
+const Reservaciones = () => {
+
   
+  // const [reservaciones,setReservaciones] = useState([])  
+  
+  // setReservaciones(reservaciones);
+
+
   const validarDatos = () =>{
     
 
@@ -161,31 +167,32 @@ const obtenerReservaciones = async () =>{
   })); 
   
   
-  document.getElementById("cuerpoTabla").innerHTML = "";
+  
+  // document.getElementById("cuerpoTabla").innerHTML = "";
 
-  for ( let i = 0; i < reservaciones.length; i++ ) {
+  // for ( let i = 0; i < reservaciones.length; i++ ) {
 
-   document.getElementById("cuerpoTabla").innerHTML +=`<tr class="registros" 
-     id="${reservaciones[i].id}"   
-     onmouseover="cambiar_color_over('${reservaciones[i].id}')"  
-     onmouseout="cambiar_color_out('${reservaciones[i].id}')">
+  //  document.getElementById("cuerpoTabla").innerHTML +=`<tr class="registros" 
+  //    id="${reservaciones[i].id}"   
+  //    onmouseover="cambiar_color_over('${reservaciones[i].id}')"  
+  //    onmouseout="cambiar_color_out('${reservaciones[i].id}')">
      
-     <td >${reservaciones[i].localizador}</td>
-     <td>${reservaciones[i].fecha}</td>
-     <td>${reservaciones[i].hora}</td>
+  //    <td >${reservaciones[i].localizador}</td>
+  //    <td>${reservaciones[i].fecha}</td>
+  //    <td>${reservaciones[i].hora}</td>
      
-     <td>
-     <input type="button" value="Editar" class="botones_formularios" onClick="editarReservacion(id)"  />
-     <a href="#">
-     <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación"  onClick={editarReservacion('hola')} /></a>
+  //    <td>
+  //    <input type="button" value="Editar" class="botones_formularios" onClick="editarReservacion(id)"  />
+  //    <a href="#">
+  //    <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación"  onClick={editarReservacion('hola')} /></a>
 
-     <a href="#">
-     <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación"></a>
-     </td>
-     </tr>`;
+  //    <a href="#">
+  //    <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación"></a>
+  //    </td>
+  //    </tr>`;
 
-    console.log(reservaciones[i].id);
-  } 
+  //  console.log(reservaciones[i].id);
+  // } 
       
    
 };   
@@ -194,22 +201,16 @@ const obtenerReservaciones = async () =>{
 useEffect(() => {
 
   obtenerReservaciones();
-//  console.log(obtenerReservaciones().reservacion.id);
 
 },[]);
 
 
 const editarReservacion =  (id) =>{
 
-  alert(id);  
-
+ 
   const coleccion = doc(db, "Reservaciones", id);
   
-  alert(coleccion.localizador);
-  
-  console.log(id);
-
-    document.getElementById("localizadorInput").value=coleccion.localizador;
+     document.getElementById("localizadorInput").value=coleccion.localizador;
     document.getElementById("nombreInput").value=coleccion.nombre;
     document.getElementById("apellidoInput").value=coleccion.apellido;
     document.getElementById("n_personasInput").value=coleccion.n_personas;
@@ -270,31 +271,15 @@ const handleInputChange = (e) => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-   //console.log(values);
-  //props.addOrEditReservacion(values);
-  
 
 };  
 
-// const addOrEditReservacion = async (reservacionObjeto) =>{
-    
-//   await db.collection('Reservacion').doc().set(reservacionObjeto)
-
-// };
 
 const limpiarHoraInput = () =>{
   document.getElementById("horaInput").value="";
 
 };
 
-const print = () => {
-
-  //console.log(values);
-//  values.localizador=document.getElementById("localizadorInput").value;
-
-  console.log(values);
-
-}
 
 
 return (
@@ -421,7 +406,7 @@ return (
 
                     <input type="reset" value="Limpiar Datos" className="botones_formularios" />&nbsp; 
                     <input type="submit" value="Enviar" className="botones_formularios" onClick={validarDatos} />
-                    <input type="button" value="Enviar2" className="botones_formularios" onClick={print} />
+                    
                   
               </form>
               <div > 
@@ -451,7 +436,36 @@ return (
                     <th scope="col" className="titulo_columnas_tabla">Operaciones</th>
                   </tr>
                 </thead>
-                <tbody id="cuerpoTabla"></tbody>
+
+                {/* <tbody id="cuerpoTabla"> */}
+
+               
+
+               <tr className="registros">
+                <td>123</td>  <td>123</td> <td>123</td> <td>123</td>
+               
+               </tr>
+                                
+
+                {/* <tr className="registros" 
+     id={obtenerReservaciones.reservacion.id}   
+     onMouseover={cambiar_color_over({reservacion.id})}  
+     onMouseout={cambiar_color_out({reservacion.id})}>
+     
+     <td >{reservaciones.localizador}</td>
+     <td>{reservaciones.fecha}</td>
+     <td>{reservaciones.hora}</td>
+     
+     <td>
+     <input type="button" value="Editar" class="botones_formularios" onClick="editarReservacion(id)"  />
+     <a href="#">
+     <img src={image_editar_reservacion} className="imagenes_registro" alt="Editar Reservación"  onClick={editarReservacion('hola')} /></a>
+
+     <a href="#">
+     <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación" /></a>
+     </td>
+     </tr> */}
+                {/* </tbody> */}
         </table> 
           </div>   
          </article>

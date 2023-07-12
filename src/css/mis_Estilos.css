@@ -225,11 +225,11 @@ background-color: rgb(98, 76, 61);
 .etiquetas{
     display: flex;
     align-items: center;
-    /* background-color:  rgb(96, 50, 1); */
+    /* background-color:  rgb(104, 73, 39); */
     font-size:medium;
     font-family: Arial, Helvetica, sans-serif;
     font-style: normal;
-    color: rgb(58, 30, 3);
+    color: rgb(94, 55, 15);
     height: 30px;     
 
 }
