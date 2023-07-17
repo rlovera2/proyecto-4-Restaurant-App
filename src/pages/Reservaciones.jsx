@@ -150,32 +150,6 @@ const obtenerReservaciones = async () =>{
     
   setReservas(reservacionesDB.docs);  
 
-  // document.getElementById("cuerpoTabla").innerHTML = "";
-
-  // for ( let i = 0; i < reservaciones.length; i++ ) {
-
-  //  document.getElementById("cuerpoTabla").innerHTML +=`<tr class="registros" 
-  //    id="${reservaciones[i].id}"   
-  //    onmouseover="cambiar_color_over('${reservaciones[i].id}')"  
-  //    onmouseout="cambiar_color_out('${reservaciones[i].id}')">
-     
-  //    <td >${reservaciones[i].localizador}</td>
-  //    <td>${reservaciones[i].fecha}</td>
-  //    <td>${reservaciones[i].hora}</td>
-     
-  //    <td>
-  //    <input type="button" value="Editar" class="botones_formularios" onClick="editarReservacion(id)"  />
-  //    <a href="#">
-  //    <img src="${image_editar_reservacion}" class="imagenes_registro" alt="Editar Reservación"  onClick={editarReservacion('hola')} /></a>
-
-  //    <a href="#">
-  //    <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación"></a>
-  //    </td>
-  //    </tr>`;
-
-  //  console.log(reservaciones[i].id);
-  // } 
-      
    
 };   
 
@@ -187,23 +161,28 @@ useEffect(() => {
 },[]);
 
 
-// const editarReservacion =  (id) =>{
+const editarReservacion =  (id) =>{
 
+
+ const coleccion = doc(db, "Reservaciones", id);
  
-//   const coleccion = doc(db, "Reservaciones", id);
-  
-//     document.getElementById("localizadorInput").value=coleccion.localizador;
-//     document.getElementById("nombreInput").value=coleccion.nombre;
-//     document.getElementById("apellidoInput").value=coleccion.apellido;
-//     document.getElementById("n_personasInput").value=coleccion.n_personas;
-//     document.getElementById("fechaInput").value=coleccion.fecha;
-//     document.getElementById("horaInput").value=coleccion.hora;
-//     document.getElementById("detallesInput").value=coleccion.detalles;
-//     document.getElementById("tipoTarjetaInput").value=coleccion.tipo_tarjeta;
-//     document.getElementById("numeroTarjetaInput").value=coleccion.numero_tarjeta;
-//     document.getElementById("fechaVencimientoTarjetaInput").value=coleccion.fecha_vence_tarjeta;
+//setValues(coleccion);
 
-// };
+console.log(coleccion.data().localizador);
+
+
+    // document.getElementById("localizadorInput").value=coleccion.localizador;
+    // document.getElementById("nombreInput").value=coleccion.nombre;
+    // document.getElementById("apellidoInput").value=coleccion.apellido;
+    // document.getElementById("n_personasInput").value=coleccion.n_personas;
+    // document.getElementById("fechaInput").value=coleccion.fecha;
+    // document.getElementById("horaInput").value=coleccion.hora;
+    // document.getElementById("detallesInput").value=coleccion.detalles;
+    // document.getElementById("tipoTarjetaInput").value=coleccion.tipo_tarjeta;
+    // document.getElementById("numeroTarjetaInput").value=coleccion.numero_tarjeta;
+    // document.getElementById("fechaVencimientoTarjetaInput").value=coleccion.fecha_vence_tarjeta;
+
+};
 
 
 // const actualizarReservacion = async  (id) =>{
@@ -271,17 +250,17 @@ const limpiarHoraInput = () =>{
 
 //***** CAMBIANDO EL COLOR DEL REGISTRO CUANDO SE ESTA SOBRE EL REGISTRO *******//
 
-const cambiar_color_over = (id) => {
-  document.getElementById(id).style.backgroundColor ="Pink";
+// const cambiar_color_over = (id) => {
+//   document.getElementById(id).style.backgroundColor ="Pink";
 
-};
+//};
 
 //***** CAMBIANDO EL COLOR DEL REGISTRO CUANDO SE ESTA FUERA DEL REGISTRO *******//
 
-const cambiar_color_out = (id) => {
-  document.getElementById(id).style.backgroundColor ="rgb(242, 200, 144)"; 
+// const cambiar_color_out = (id) => {
+//   document.getElementById(id).style.backgroundColor ="rgb(242, 200, 144)"; 
      
-};
+// };
 
 return (
 
@@ -511,16 +490,16 @@ return (
         
                         <tr 
                         className="registros" 
-                        id={reserva.id}
-                        // onMouseOver={cambiar_color_over(id)}  
-                        // onMouseOut={cambiar_color_out(id)}
-                        >
+                        id={reserva.id}>
                              <td>{reserva.data().localizador}</td>
                              <td>{reserva.data().fecha}</td>
                              <td>{reserva.data().hora}</td>
                              <td>
                               <a href="#">
-                              <img src={image_editar_reservacion} className="imagenes_registro" alt="Editar Reservación"  /></a>
+                              <img src={image_editar_reservacion} className="imagenes_registro" alt="Editar Reservación"  
+                              onClick={editarReservacion(reserva.id)} /></a>
+
+                            
 
                               <a href="#">
                               <img src={image_eliminar_reservacion} className="imagenes_registro" alt="Eliminar Reservación" /></a>
@@ -529,34 +508,10 @@ return (
                          </tr>
                     </>      
                   )
-                    })}
-                         
-
-                {/* <tr className="registros" 
-     id={obtenerReservaciones.reservacion.id}   
-     onMouseover={cambiar_color_over({reservacion.id})}  
-     onMouseout={cambiar_color_out({reservacion.id})}>
-     
-     <td >{reservaciones.localizador}</td>
-     <td>{reservaciones.fecha}</td>
-     <td>{reservaciones.hora}</td>
-     
-     <td>
-     <input type="button" value="Editar" class="botones_formularios" onClick="editarReservacion(id)"  />
-     <a href="#">
-     <img src={image_editar_reservacion} className="imagenes_registro" alt="Editar Reservación"  /></a>
-
-     <a href="#">
-     <img src="${image_eliminar_reservacion}" class="imagenes_registro" alt="Eliminar Reservación" /></a>
-     </td>
-     </tr> */}
-              
-        </table> 
+                    })};
+            </table> 
           </div>   
-         </article>
-
-
-        </main>
+         </article></main>
         <br />
         <Footer />
         
@@ -565,8 +520,7 @@ return (
   };
   
  
- //{await Reservaciones.obtenerReservaciones}
-
+ 
 export default Reservaciones;
 
 //window.addEventListener("load",await Reservaciones.obtenerReservaciones);
