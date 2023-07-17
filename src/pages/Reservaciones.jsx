@@ -269,7 +269,19 @@ const limpiarHoraInput = () =>{
 
 };
 
+//***** CAMBIANDO EL COLOR DEL REGISTRO CUANDO SE ESTA SOBRE EL REGISTRO *******//
 
+const cambiar_color_over = (id) => {
+  document.getElementById(id).style.backgroundColor ="Pink";
+
+};
+
+//***** CAMBIANDO EL COLOR DEL REGISTRO CUANDO SE ESTA FUERA DEL REGISTRO *******//
+
+const cambiar_color_out = (id) => {
+  document.getElementById(id).style.backgroundColor ="rgb(242, 200, 144)"; 
+     
+};
 
 return (
 
@@ -462,7 +474,7 @@ return (
                     <input type="submit" value="Enviar" className="botones_formularios"  />
                     
                   
-              </form>
+              </form> 
               <div > 
                
               <a href="#" 
@@ -493,11 +505,17 @@ return (
                
                {reservas.map(reserva => {
 
-      
-              console.log(reserva.data().localizador);
+                  return(
+                  <>
+              
         
-                        <tr className="registros" id={reserva.id}>
-                             <td>123{reserva.data().localizador}</td>
+                        <tr 
+                        className="registros" 
+                        id={reserva.id}
+                        // onMouseOver={cambiar_color_over(id)}  
+                        // onMouseOut={cambiar_color_out(id)}
+                        >
+                             <td>{reserva.data().localizador}</td>
                              <td>{reserva.data().fecha}</td>
                              <td>{reserva.data().hora}</td>
                              <td>
@@ -509,6 +527,8 @@ return (
                             </td>
                                         
                          </tr>
+                    </>      
+                  )
                     })}
                          
 

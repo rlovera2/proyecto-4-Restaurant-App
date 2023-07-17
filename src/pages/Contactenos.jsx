@@ -4,7 +4,9 @@ import image1 from "../img/@.jpg";
 /********* IMPORTANDO COMPONENTES *********/
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import React, {useState} from "react";
+import React from "react";
+import {useState} from "react";
+import {useEffect} from "react";
 
 /*********** IMPORTANDO BASE DE DATOS **********************/
 import {db} from "../firebase/firebase";
@@ -25,7 +27,7 @@ const Contactenos = () => {
 
 
 const [values, setValues] = useState(estadoInicialValores);
-
+const [mensajes, setMensajes] = useState([]);
 
   const handleInputChange = (e) => {
   
@@ -114,7 +116,7 @@ const limpiarDatos = () =>{
   
     const coleccionContactenos = collection(db, "Contactenos");
     await addDoc(coleccionContactenos, mensaje);
-    // await obtenerMensajes();
+    await obtenerMensajes();
   
   };
   
@@ -126,6 +128,23 @@ const limpiarDatos = () =>{
   
   };  
   
+  const obtenerMensajes = async () =>{
+
+    const collectionMensajes = collection(db, "Contactenos");
+    const mensajesDB = await getDocs(collectionMensajes);
+      
+    setMensajes(mensajesDB.docs);  
+         
+     
+  };   
+  
+  
+  
+useEffect(() => {
+
+  obtenerMensajes();
+
+},[]);
 
     return (
       <>
@@ -233,6 +252,36 @@ const limpiarDatos = () =>{
         </form>
         
         <br /><br />
+        
+        <div>
+        <table>
+                <thead>
+                  <tr>
+                    <th scope="col" className="titulo_columnas_tabla">Nombre</th>
+                    <th scope="col" className="titulo_columnas_tabla">Apellio</th>
+                    <th scope="col" className="titulo_columnas_tabla">Fecha</th>
+              
+                  </tr>
+                </thead>
+
+                {mensajes.map((mensaje) => {
+                  return(
+          
+                    <>
+          
+                     <tr className="registros" id={mensaje.id}>
+                      <td>{mensaje.data().nombre}</td>
+                      <td>{mensaje.data().apellido}</td>
+                      <td>{mensaje.data().telefono}</td>
+                    </tr>
+                    
+                    </>
+                  )
+       })}
+       </table>
+
+        </div>
+       
         </div>
           </article>
         </main>
