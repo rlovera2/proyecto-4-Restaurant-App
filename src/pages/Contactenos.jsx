@@ -28,12 +28,12 @@ const [values, setValues] = useState(estadoInicialValores);
 
 
   const handleInputChange = (e) => {
-    const{ id, value } = e.target;
-    setValues({...values,[id]: value})
+  
+    setValues({...values,[e.target.name]: e.target.value});
     
     
   };
-
+  
   const validarDatos = () =>{
     
 
@@ -89,29 +89,25 @@ const [values, setValues] = useState(estadoInicialValores);
 
   };
 
-  const limpiarDatos = () =>{
-    document.getElementById("nombreInput").value="";
-    document.getElementById("apellidoInput").value="";
-    document.getElementById("telefonoInput").value="";
-    document.getElementById("emailInput").value="";
-    document.getElementById("motivoInput").value="";
-   
-  };
 
+  
+const limpiarDatos = () =>{
+
+  setValues(estadoInicialValores);
+  
+};
 
 
   const crearMensaje = async () =>{
-    
-    const fecha = Date.getDate();
-    
-   console.log(fecha);
-
+  
+    let fecha = new Date()
+        
     const mensaje = {
-        nombre:               values.nombreInput.toUpperCase(),
-        apellido:             values.apellidoInput.toUpperCase(),
-        telefono:             values.telefonoInput,
-        email:                values.emailInput,
-        motivo:               values.motivoInput.toUpperCase(),
+        nombre:               values.nombre.toUpperCase(),
+        apellido:             values.apellido.toUpperCase(),
+        telefono:             values.telefono,
+        email:                values.email,
+        motivo:               values.motivo.toUpperCase(),
         fecha:                fecha
           
     };
@@ -125,6 +121,8 @@ const [values, setValues] = useState(estadoInicialValores);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    validarDatos();
   
   };  
   
@@ -155,43 +153,82 @@ const [values, setValues] = useState(estadoInicialValores);
             {/* NOMBRE */}
                         
                    <label htmlFor="nombreInput" className="etiquetas">Nombre</label>
-                   <input type="text" className="campos" id="nombreInput"  
-                    autoComplete="off" onChange={handleInputChange} />
+                  
+                   <input 
+                   type="text" 
+                   className="campos" 
+                   id="nombreInput"  
+                   autoComplete="off" 
+                   name="nombre"
+                   value={values.nombre}
+                   onChange={handleInputChange} />
+                  
                    <div id="mensaje_nombre" className="mensaje">Por favor ingrese un nombre valido, gracias</div>
                 
             {/* APELLIDO */}
 
                    <label htmlFor="apellidoInput" className="etiquetas">&nbsp;Apellido</label>
-                   <input type="text" className="campos" id="apellidoInput"  
-                   autoComplete="off" onChange={handleInputChange} />
+                  
+                   <input 
+                   type="text" 
+                   className="campos" 
+                   id="apellidoInput"  
+                   autoComplete="off" 
+                   name="apellido"
+                   value={values.apellido}
+                   onChange={handleInputChange} />
+                  
                    <div id="mensaje_apellido" className="mensaje">Por favor ingrese un apellido valido, gracias</div>
 
             {/* TELEFONO */}
 
                    <label htmlFor="telefonoInput" className="etiquetas">&nbsp;Tel&eacute;fono</label>
-                   <input type="text" className="campos" id="telefonoInput"  
-                   autoComplete="off" onChange={handleInputChange} />
+                   <input 
+                   type="text" 
+                   className="campos" 
+                   id="telefonoInput"  
+                   autoComplete="off" 
+                   name="telefono"
+                   value={values.telefono}
+                   onChange={handleInputChange} />
+                   
                    <div id="mensaje_telefono" className="mensaje">Por favor ingrese un tel&eacute;fono valido, gracias</div>
 
             {/* EMAIL */}
 
                    <label htmlFor="emailInput" className="etiquetas">&nbsp;Email</label>
-                   <input type="text" className="campos" id="emailInput"  
-                   autoComplete="off" onChange={handleInputChange} />
+                   
+                   <input 
+                   type="text" 
+                   className="campos" 
+                   id="emailInput"  
+                   autoComplete="off" 
+                   name="email"
+                   value={values.email}
+                   onChange={handleInputChange} />
+                  
                    <div id="mensaje_email" className="mensaje">Por favor ingrese un e-mail valido, gracias</div>
           
           {/* MOTIVO */}
 
                    <label htmlFor="motivoInput" className="etiquetas">&nbsp;Motivo</label>
-                   <input type="text" className="campos" id="motivoInput"  
-                   autoComplete="off" onChange={handleInputChange} />
+
+                   <input 
+                   type="text" 
+                   className="campos" 
+                   id="motivoInput"  
+                   autoComplete="off" 
+                   name="motivo"
+                   value={values.motivo} 
+                   onChange={handleInputChange} />
+                  
                    <div id="mensaje_motivo" className="mensaje">Por favor ingrese un motivo valido, gracias</div>
 
 
         <br />
 
                 <input type="reset" value="Limpiar Datos" className="botones_formularios" />&nbsp; 
-                <input type="submit" value="Enviar" className="botones_formularios" onClick={validarDatos} />
+                <input type="submit" value="Enviar" className="botones_formularios" />
                 
         </form>
         
