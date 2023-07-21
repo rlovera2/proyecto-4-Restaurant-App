@@ -4,4 +4,4 @@ el tema es una aplicacion de un restaurante con sus reservaciones menu y contact
 
 Autor: Roberto Lovera
 
-https://rlovera2.github.io/proyecto-4-Restaurant-App/
+https://proyecto-4-restaurant-app.netlify.app/
