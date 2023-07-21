@@ -102,15 +102,18 @@ const limpiarDatos = () =>{
 
   const crearMensaje = async () =>{
   
-    let fecha = new Date()
-        
+    let fechaActual = new Date();
+    fechaActual = fechaActual.getFullYear() + '-' + (fechaActual.getMonth() + 1) + '-' + fechaActual.getDate();
+
+    values.fecha=fechaActual;
+
     const mensaje = {
         nombre:               values.nombre.toUpperCase(),
         apellido:             values.apellido.toUpperCase(),
         telefono:             values.telefono,
         email:                values.email,
         motivo:               values.motivo.toUpperCase(),
-        fecha:                fecha
+        fecha:                values.fecha
           
     };
   
@@ -259,6 +262,7 @@ useEffect(() => {
                   <tr>
                     <th scope="col" className="titulo_columnas_tabla">Nombre</th>
                     <th scope="col" className="titulo_columnas_tabla">Apellio</th>
+                    <th scope="col" className="titulo_columnas_tabla">Tel&eacute;fono</th>
                     <th scope="col" className="titulo_columnas_tabla">Fecha</th>
               
                   </tr>
@@ -273,6 +277,7 @@ useEffect(() => {
                       <td>{mensaje.data().nombre}</td>
                       <td>{mensaje.data().apellido}</td>
                       <td>{mensaje.data().telefono}</td>
+                      <td>{mensaje.data().fecha}</td>
                     </tr>
                     
                     </>

@@ -91,6 +91,30 @@ const Reservaciones = () => {
      
 };
 
+
+const crearReservacion = async () =>{
+  
+  const reservacion = {
+    localizador:          values.localizador.toUpperCase(),
+    nombre:               values.nombre.toUpperCase(),
+    apellido:             values.apellido.toUpperCase(),
+    n_personas:           values.n_personas,
+    fecha:                values.fecha,
+    hora:                 values.hora,
+    detalles:             values.detalles.toUpperCase(),
+    tipo_tarjeta:         values.tipo_tarjeta.toUpperCase(),
+    numero_tarjeta:       values.numero_tarjeta,
+    fecha_vence_tarjeta:  values.fecha_vence_tarjeta
+
+};
+
+const coleccionReservaciones = collection(db, "Reservaciones");
+await addDoc(coleccionReservaciones, reservacion);
+await obtenerReservaciones();
+
+};
+
+
 const limpiarMensajesError = () =>{
 
         document.getElementById("mensaje_nombre").style.display = "none";
@@ -105,6 +129,12 @@ const limpiarMensajesError = () =>{
 
 };
 
+const limpiarDatos = () =>{
+    
+  setValues(estadoInicialValores);
+   
+};
+
 const generarLocalizador = () =>{
   values.localizador = values.fecha +  "-" + 
   values.nombre.toUpperCase().substring(0, 1) + 
@@ -113,45 +143,25 @@ const generarLocalizador = () =>{
 };
 
 
-const limpiarDatos = () =>{
-    
-  setValues(estadoInicialValores);
-  
-  
-};
-
-const crearReservacion = async () =>{
-  
-    const reservacion = {
-      localizador:          values.localizador.toUpperCase(),
-      nombre:               values.nombreInput.toUpperCase(),
-      apellido:             values.apellidoInput.toUpperCase(),
-      n_personas:           values.n_personas,
-      fecha:                values.fecha,
-      hora:                 values.hora,
-      detalles:             values.detalles.toUpperCase(),
-      tipo_tarjeta:         values.tipo_tarjeta.toUpperCase(),
-      numero_tarjeta:       values.numero_tarjeta,
-      fecha_vence_tarjeta:  values.fecha_vence_tarjeta
-
-  };
-
-  const coleccionReservaciones = collection(db, "Reservaciones");
-  await addDoc(coleccionReservaciones, reservacion);
-  await obtenerReservaciones();
-
-};
-
-
 const obtenerReservaciones = async () =>{
 
   const collectionReservaciones = collection(db, "Reservaciones");
   const reservacionesDB = await getDocs(collectionReservaciones);
-    
+  //const reservaciones = reservacionesDB.docs.map((reservacion) => ({
+
+ //       id: reservacion.id,
+  
+ //       ...reservacion.data(),
+  
+ //   }));
+
+ //  alert(reservaciones); 
+   
   setReservas(reservacionesDB.docs);  
 
    
 };   
+
 
 
 useEffect(() => {
@@ -161,37 +171,50 @@ useEffect(() => {
 },[]);
 
 
-const editarReservacion =  (id) =>{
+const editarReservacion = async (id,id_local,nombre,apellido,n_personas,fecha,hora,detalles,tipoTarjeta,numeroTarjeta,fechaVencimientoTarjeta) =>{
+
+  // const coleccion = doc(db, "Reservaciones", id);
+  // const data = await   getDocs(coleccion);
+
+   alert(apellido);
+    
+       values.localizador =  id_local;
+       values.nombre = nombre;
+       values.apellido = apellido;
+       values.n_personas = n_personas;
+       values.fecha = fecha;
+       values.hora = hora;
+       values.detalles = detalles;
+       values.tipo_tarjeta = tipoTarjeta;
+       values.numero_tarjeta = numeroTarjeta;
+       values.fecha_vence_tarjeta = fechaVencimientoTarjeta;
 
 
- const coleccion = doc(db, "Reservaciones", id);
- 
-//setValues(coleccion);
-
-console.log(coleccion.data().localizador);
+    // setValues(data.docs.map((doc)=> ({...doc.data(), id: doc.id})));
 
 
-    // document.getElementById("localizadorInput").value=coleccion.localizador;
-    // document.getElementById("nombreInput").value=coleccion.nombre;
-    // document.getElementById("apellidoInput").value=coleccion.apellido;
-    // document.getElementById("n_personasInput").value=coleccion.n_personas;
-    // document.getElementById("fechaInput").value=coleccion.fecha;
-    // document.getElementById("horaInput").value=coleccion.hora;
-    // document.getElementById("detallesInput").value=coleccion.detalles;
-    // document.getElementById("tipoTarjetaInput").value=coleccion.tipo_tarjeta;
-    // document.getElementById("numeroTarjetaInput").value=coleccion.numero_tarjeta;
-    // document.getElementById("fechaVencimientoTarjetaInput").value=coleccion.fecha_vence_tarjeta;
 
 };
 
 
-// const actualizarReservacion = async  (id) =>{
-//     const coleccion = doc(db, "Reservaciones", id);
-//     await updateDoc(coleccion,reservacion);
-//     await obtenerReservaciones(); 
+const actualizarReservacion = async  (id) =>{
+    const coleccion = doc(db, "Reservaciones", id);
+    await updateDoc(coleccion,values);
+    await obtenerReservaciones(); 
  
 
-// };
+};
+
+
+
+const eliminarReservacion = async (id,id_local) => {
+  const registro = doc(db, "Reservaciones", id);
+  await deleteDoc(registro);
+  await obtenerReservaciones();
+  alert("se elimino la reserva ( " + id_local + " ) de forma exitosa.");
+};
+
+
 
 
  //************CAMBIANDO IMAGEN PRINCIPAL CUANDO TIENE EL FOCO ***************/
@@ -450,8 +473,12 @@ return (
                     <br />
 
                     <input type="reset" value="Limpiar Datos" className="botones_formularios" />&nbsp; 
-                    <input type="submit" value="Enviar" className="botones_formularios"  />
-                    
+                    <input type="submit" value="Enviar" className="botones_formularios"  />&nbsp;
+                    <input type="submit" value="Actualizar" 
+                    className="boton_actualizar"   
+                    id="btnActualizar"  
+                    onClick={actualizarReservacion} />
+    
                   
               </form> 
               <div > 
@@ -471,7 +498,9 @@ return (
                 </a>
              
               </div>
-                           
+
+
+              <div>     
               <table>
                 <thead>
                   <tr>
@@ -484,32 +513,53 @@ return (
                
                {reservas.map(reserva => {
 
+                const txt_localizador = reserva.data().localizador;
+
                   return(
+                    
                   <>
-              
-        
-                        <tr 
+                    <tr 
                         className="registros" 
                         id={reserva.id}>
-                             <td>{reserva.data().localizador}</td>
+                             <td>{txt_localizador}</td>
                              <td>{reserva.data().fecha}</td>
                              <td>{reserva.data().hora}</td>
                              <td>
-                              <a href="#">
+                              
                               <img src={image_editar_reservacion} className="imagenes_registro" alt="Editar Reservación"  
-                              onClick={editarReservacion(reserva.id)} /></a>
+                              onClick={() => {editarReservacion(
+                                
+                                
+                                reserva.id,
+                                txt_localizador,
+                                reserva.data().nombre,
+                                reserva.data().apellido,
+                                reserva.data().n_personas,
+                                reserva.data().fecha,
+                                reserva.data().hora,
+                                reserva.data().detalles,
+                                reserva.data().tipo_tarjeta,
+                                reserva.data().numero_tarjeta,
+                                reserva.data().fecha_vence_tarjeta
+
+                              
+                              )}} />
 
                             
 
                               <a href="#">
-                              <img src={image_eliminar_reservacion} className="imagenes_registro" alt="Eliminar Reservación" /></a>
+                              <img src={image_eliminar_reservacion} className="imagenes_registro" alt="Eliminar Reservación"
+                              onClick={() => {eliminarReservacion(reserva.id,reserva.data().localizador)}}
+                              
+                              /></a>
                             </td>
                                         
                          </tr>
                     </>      
                   )
-                    })};
-            </table> 
+                    })}
+            </table>
+            </div> 
           </div>   
          </article></main>
         <br />
