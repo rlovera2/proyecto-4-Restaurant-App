@@ -179,6 +179,7 @@ const editarReservacion =  (id,id_local,nombre,apellido,n_personas,fecha,hora,de
   // const data = await   getDocs(coleccion);
 
   idActualizar=id;
+  document.getElementById("btnEnviar").style.display = "none";
 
   setValues(
        values.localizador =  id_local,
@@ -225,7 +226,8 @@ const actualizarReservacion = async  () =>{
               document.getElementById("localizadorInput").value +" ) ");
         limpiarMensajesError();
         limpiarDatos();
- 
+        document.getElementById("btnEnviar").style.display = "inline";
+        document.getElementById("btnActualizar").style.display="none";
 
 };
 
@@ -497,7 +499,7 @@ return (
                     <br />
 
                     <input type="reset" value="Limpiar Datos" className="botones_formularios" />&nbsp; 
-                    <input type="submit" value="Enviar" className="botones_formularios"  />&nbsp;
+                    <input type="submit" value="Enviar" className="botones_formularios" id="btnEnviar"  />&nbsp;
                     
                     <input type="button" value="Actualizar" 
                     className="boton_actualizar"   
