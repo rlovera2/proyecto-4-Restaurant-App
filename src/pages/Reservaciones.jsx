@@ -197,12 +197,12 @@ const editarReservacion =  (id,id_local,nombre,apellido,n_personas,fecha,hora,de
   //     alert(values.localizador);
   
        document.getElementById("localizadorInput").value = values.localizador;
-       document.getElementById("nombreInput").value = values.nombre;
-       document.getElementById("apellidoInput").value = values.apellido;
+       document.getElementById("nombreInput").value = values.nombre.toUpperCase();
+       document.getElementById("apellidoInput").value = values.apellido.toUpperCase();
        document.getElementById("n_personasInput").value = values.n_personas;
        document.getElementById("fechaInput").value = values.fecha;
        document.getElementById("horaInput").value = values.hora;
-       document.getElementById("detallesInput").value = values.detalles;
+       document.getElementById("detallesInput").value = values.detalles.toUpperCase();
        document.getElementById("tipoTarjetaInput").value = values.tipo_tarjeta;
        document.getElementById("numeroTarjetaInput").value = values.numero_tarjeta;
        document.getElementById("fechaVencimientoTarjetaInput").value = values.fecha_vence_tarjeta;
@@ -218,7 +218,7 @@ const editarReservacion =  (id,id_local,nombre,apellido,n_personas,fecha,hora,de
 
 const actualizarReservacion = async  () =>{
     
-    generarLocalizador();
+    //generarLocalizador();
     const coleccion = doc(db, "Reservaciones", idActualizar);
     await updateDoc(coleccion,values);
     await obtenerReservaciones(); 
@@ -238,6 +238,8 @@ const eliminarReservacion = async (id,id_local) => {
   await deleteDoc(registro);
   await obtenerReservaciones();
   alert("se elimino la reserva ( " + id_local + " ) de forma exitosa.");
+  limpiarMensajesError();
+  limpiarDatos();
 };
 
 
@@ -504,7 +506,7 @@ return (
                     <input type="button" value="Actualizar" 
                     className="boton_actualizar"   
                     id="btnActualizar"  
-                    onClick={() =>  actualizarReservacion} />
+                    onClick={actualizarReservacion} />
                     <br /><br />
 
                      <a href="#registros">Ver Reservas</a>
@@ -550,7 +552,7 @@ return (
                   return(
                     
                   <>
-                    <tr 
+                  <tr 
                         className="registros" 
                         id={reserva.id}
                      onMouseOver={() => cambiar_color_over(reserva.id)} 
