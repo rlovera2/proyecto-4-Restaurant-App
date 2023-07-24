@@ -217,7 +217,7 @@ const editarReservacion =  (id,id_local,nombre,apellido,n_personas,fecha,hora,de
 
 
 const actualizarReservacion = async  () =>{
-    
+  validarDatos();
     //generarLocalizador();
     const coleccion = doc(db, "Reservaciones", idActualizar);
     await updateDoc(coleccion,values);
