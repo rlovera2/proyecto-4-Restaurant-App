@@ -10,7 +10,7 @@ import {useEffect} from "react";
 
 /*********** IMPORTANDO BASE DE DATOS **********************/
 import {db} from "../firebase/firebase";
-import {collection, addDoc, getDocs, doc, updateDoc} from "firebase/firestore";
+import {collection, addDoc, getDocs} from "firebase/firestore";
 
 
 const Contactenos = () => {
@@ -149,6 +149,24 @@ useEffect(() => {
 
 },[]);
 
+
+
+//***** CAMBIANDO EL COLOR DEL REGISTRO CUANDO SE ESTA SOBRE EL REGISTRO *******//
+
+const cambiar_color_over = (id) => {
+        document.getElementById(id).style.backgroundColor ="Pink";
+      
+    };
+
+//***** CAMBIANDO EL COLOR DEL REGISTRO CUANDO SE ESTA FUERA DEL REGISTRO *******//
+
+const cambiar_color_out = (id) => {
+        document.getElementById(id).style.backgroundColor ="rgb(242, 200, 144)"; 
+           
+    };
+
+
+
     return (
       <>
       <Header />
@@ -273,11 +291,15 @@ useEffect(() => {
           
                     <>
           
-                     <tr className="registros" id={mensaje.id}>
+                     <tr className="registros" id={mensaje.id} 
+                     onMouseOver={() => cambiar_color_over(mensaje.id)} 
+                     onMouseOut={() => cambiar_color_out(mensaje.id)}>
+
                       <td>{mensaje.data().nombre}</td>
                       <td>{mensaje.data().apellido}</td>
                       <td>{mensaje.data().telefono}</td>
                       <td>{mensaje.data().fecha}</td>
+                   
                     </tr>
                     
                     </>

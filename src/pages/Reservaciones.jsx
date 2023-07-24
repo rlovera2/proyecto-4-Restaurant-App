@@ -20,7 +20,9 @@ import {db} from "../firebase/firebase";
 import {collection, addDoc, getDocs, doc, updateDoc, deleteDoc} from "firebase/firestore";
 
 
+//** PARA ACTUALIZAR RESERVA */
 
+let idActualizar;
 
 
 const Reservaciones = () => {
@@ -171,36 +173,58 @@ useEffect(() => {
 },[]);
 
 
-const editarReservacion = async (id,id_local,nombre,apellido,n_personas,fecha,hora,detalles,tipoTarjeta,numeroTarjeta,fechaVencimientoTarjeta) =>{
+const editarReservacion =  (id,id_local,nombre,apellido,n_personas,fecha,hora,detalles,tipoTarjeta,numeroTarjeta,fechaVencimientoTarjeta) =>{
 
   // const coleccion = doc(db, "Reservaciones", id);
   // const data = await   getDocs(coleccion);
 
-   alert(apellido);
-    
-       values.localizador =  id_local;
-       values.nombre = nombre;
-       values.apellido = apellido;
-       values.n_personas = n_personas;
-       values.fecha = fecha;
-       values.hora = hora;
-       values.detalles = detalles;
-       values.tipo_tarjeta = tipoTarjeta;
-       values.numero_tarjeta = numeroTarjeta;
-       values.fecha_vence_tarjeta = fechaVencimientoTarjeta;
+  idActualizar=id;
 
+  setValues(
+       values.localizador =  id_local,
+       values.nombre = nombre,
+       values.apellido = apellido,
+       values.n_personas = n_personas,
+       values.fecha = fecha,
+       values.hora = hora,
+       values.detalles = detalles,
+       values.tipo_tarjeta = tipoTarjeta,
+       values.numero_tarjeta = numeroTarjeta,
+       values.fecha_vence_tarjeta = fechaVencimientoTarjeta);
 
+      
+  //     alert(values.localizador);
+  
+       document.getElementById("localizadorInput").value = values.localizador;
+       document.getElementById("nombreInput").value = values.nombre;
+       document.getElementById("apellidoInput").value = values.apellido;
+       document.getElementById("n_personasInput").value = values.n_personas;
+       document.getElementById("fechaInput").value = values.fecha;
+       document.getElementById("horaInput").value = values.hora;
+       document.getElementById("detallesInput").value = values.detalles;
+       document.getElementById("tipoTarjetaInput").value = values.tipo_tarjeta;
+       document.getElementById("numeroTarjetaInput").value = values.numero_tarjeta;
+       document.getElementById("fechaVencimientoTarjetaInput").value = values.fecha_vence_tarjeta;
+
+       document.getElementById("btnActualizar").style.display="inline";
+       
     // setValues(data.docs.map((doc)=> ({...doc.data(), id: doc.id})));
 
-
+    
 
 };
 
 
-const actualizarReservacion = async  (id) =>{
-    const coleccion = doc(db, "Reservaciones", id);
+const actualizarReservacion = async  () =>{
+    
+    generarLocalizador();
+    const coleccion = doc(db, "Reservaciones", idActualizar);
     await updateDoc(coleccion,values);
     await obtenerReservaciones(); 
+    alert("Se actualizo la reservacion con exito, con el número de localizador ( "+ 
+              document.getElementById("localizadorInput").value +" ) ");
+        limpiarMensajesError();
+        limpiarDatos();
  
 
 };
@@ -273,17 +297,17 @@ const limpiarHoraInput = () =>{
 
 //***** CAMBIANDO EL COLOR DEL REGISTRO CUANDO SE ESTA SOBRE EL REGISTRO *******//
 
-// const cambiar_color_over = (id) => {
-//   document.getElementById(id).style.backgroundColor ="Pink";
+const cambiar_color_over = (id) => {
+  document.getElementById(id).style.backgroundColor ="Pink";
 
-//};
+};
 
 //***** CAMBIANDO EL COLOR DEL REGISTRO CUANDO SE ESTA FUERA DEL REGISTRO *******//
 
-// const cambiar_color_out = (id) => {
-//   document.getElementById(id).style.backgroundColor ="rgb(242, 200, 144)"; 
+const cambiar_color_out = (id) => {
+  document.getElementById(id).style.backgroundColor ="rgb(242, 200, 144)"; 
      
-// };
+};
 
 return (
 
@@ -298,7 +322,7 @@ return (
             <p>Por favor ingrese los datos para crear una nueva reservaci&oacute;n. </p>
             
             <div className="contenedor_reservaciones">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} name="formReserva">
                 
                 {/* LOCALIZADOR */}
 
@@ -474,13 +498,17 @@ return (
 
                     <input type="reset" value="Limpiar Datos" className="botones_formularios" />&nbsp; 
                     <input type="submit" value="Enviar" className="botones_formularios"  />&nbsp;
-                    <input type="submit" value="Actualizar" 
+                    
+                    <input type="button" value="Actualizar" 
                     className="boton_actualizar"   
                     id="btnActualizar"  
-                    onClick={actualizarReservacion} />
-    
+                    onClick={() =>  actualizarReservacion} />
+                    <br /><br />
+
+                     <a href="#registros">Ver Reservas</a>
                   
               </form> 
+              
               <div > 
                
               <a href="#" 
@@ -500,7 +528,9 @@ return (
               </div>
 
 
-              <div>     
+              <div>  
+                <a name="registros"></a>
+
               <table>
                 <thead>
                   <tr>
@@ -520,7 +550,10 @@ return (
                   <>
                     <tr 
                         className="registros" 
-                        id={reserva.id}>
+                        id={reserva.id}
+                     onMouseOver={() => cambiar_color_over(reserva.id)} 
+                     onMouseOut={() => cambiar_color_out(reserva.id)}>
+                      
                              <td>{txt_localizador}</td>
                              <td>{reserva.data().fecha}</td>
                              <td>{reserva.data().hora}</td>
