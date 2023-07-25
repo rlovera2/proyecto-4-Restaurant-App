@@ -25,6 +25,8 @@ import {collection, addDoc, getDocs, doc, updateDoc, deleteDoc} from "firebase/f
 let idActualizar;
 let xOpt="0";
 
+
+
 const Reservaciones = () => {
 
   
