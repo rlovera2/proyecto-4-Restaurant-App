@@ -23,7 +23,7 @@ import {collection, addDoc, getDocs, doc, updateDoc, deleteDoc} from "firebase/f
 //** PARA ACTUALIZAR RESERVA */
 
 let idActualizar;
-
+let xOpt="0";
 
 const Reservaciones = () => {
 
@@ -82,12 +82,14 @@ const Reservaciones = () => {
         document.getElementById("fechaVencimientoTarjetaInput").focus();
     }
      else{
+
+      if(xOpt == "0"){
         crearReservacion();
         alert("Se creo la reservacion con exito, con el número de localizador ( "+ 
               document.getElementById("localizadorInput").value +" ) ");
         limpiarMensajesError();
         limpiarDatos();
-        
+      } 
         
     }
      
@@ -217,7 +219,8 @@ const editarReservacion =  (id,id_local,nombre,apellido,n_personas,fecha,hora,de
 
 
 const actualizarReservacion = async  () =>{
- // validarDatos();
+    xOpt="1";
+    validarDatos();
     //generarLocalizador();
     const coleccion = doc(db, "Reservaciones", idActualizar);
     await updateDoc(coleccion,values);
@@ -286,9 +289,10 @@ const handleInputChange = (e) => {
   
 };
 
+
 const handleSubmit = (e) => {
   e.preventDefault();
-  
+  xOpt="0";
   validarDatos();
 
 };  
