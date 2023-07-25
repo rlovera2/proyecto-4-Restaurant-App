@@ -65,7 +65,7 @@ const HomePage = () => {
             <img id="postres" src={image_tiramisu} className="imagenes_home" 
             onMouseOver={() => cambiarImagenOn('postres',image_panacota)} 
             onMouseOut={() => cambiarImagenOff('postres',image_tiramisu)} />
-          <br/>
+          
           
           </div>
           
