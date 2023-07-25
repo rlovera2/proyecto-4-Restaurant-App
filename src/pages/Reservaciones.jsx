@@ -89,6 +89,7 @@ const Reservaciones = () => {
               document.getElementById("localizadorInput").value +" ) ");
         limpiarMensajesError();
         limpiarDatos();
+        
       } 
         
     }
