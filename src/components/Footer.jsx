@@ -10,10 +10,7 @@ const Footer = () => {
         <div className="menu_footer">
 
         
-              <NavLink className="nav-link" to="/">Home</NavLink> | 
-              <NavLink className="nav-link" to="/menu">Menu</NavLink> | 
-              <NavLink className="nav-link" to="/reservaciones">Resevaciones</NavLink> | 
-              <NavLink className="nav-link" to="/contactenos">Contactenos</NavLink> <br />
+              <NavLink to="/">Home</NavLink> | <NavLink to="/menu">Menu</NavLink> | <NavLink to="/reservaciones">Resevaciones</NavLink> | <NavLink to="/contactenos">Contactenos</NavLink> <br />
         
         <br />
           Para cualquier falla en el sistema puede ponerse 
