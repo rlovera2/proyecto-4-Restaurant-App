@@ -587,15 +587,15 @@ return (
                                 reserva.data().fecha_vence_tarjeta
 
                               
-                              )}} />
+                              )}} /> &nbsp;&nbsp;
 
                             
 
-                              <a href="#">
+                              
                               <img src={image_eliminar_reservacion} className="imagenes_registro" alt="Eliminar Reservación"
                               onClick={() => {eliminarReservacion(reserva.id,reserva.data().localizador)}}
                               
-                              /></a>
+                              />
                             </td>
                                         
                          </tr>
