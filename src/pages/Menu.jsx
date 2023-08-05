@@ -5,6 +5,24 @@ import Footer from "../components/Footer";
 
 
 const Menu = () => {
+
+// const propiedades  = () => {
+//   return(
+// <div>
+//   <pastas nombre="Bolonesa" />
+//   <pastas nombre="Carbonara" />
+// </div>
+//   );
+// }
+
+// const imprimirMenu = (props) => {
+//     return(
+//       <div>
+//       Nombre: {props.nombre}
+//       </div>
+//     );
+
+// }
     return (
       <>
       <Header />
@@ -21,7 +39,7 @@ const Menu = () => {
             </td></tr>
             </table>
             <br />
-            
+            {imprimirMenu}
             <table>
                 <tr><td className="celdas_tabla_menu">
                   <span className="subtituloTabla">
@@ -37,7 +55,7 @@ const Menu = () => {
 
             <td className="celdas_tabla_menu">
               <span className="subtituloTabla">
-                Risotto
+                Risottos
               </span>
             <ul>
                 <li>Piemomtese</li>
