@@ -39,7 +39,7 @@ const Menu = () => {
             </td></tr>
             </table>
             <br />
-            {imprimirMenu}
+            {/* {imprimirMenu} */}
             <table>
                 <tr><td className="celdas_tabla_menu">
                   <span className="subtituloTabla">
