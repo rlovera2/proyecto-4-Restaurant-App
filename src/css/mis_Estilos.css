@@ -187,6 +187,25 @@ td{ border: rgb(54, 37, 2) 2px solid;}
 
 }
 
+
+.contenedor_menu{
+    display: flex;
+    flex-flow:wrap;
+    justify-content:space-evenly; 
+    gap: 10px;
+    background-color: rgb(255, 255, 255);
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    color: rgb(100, 51, 11);
+    align-items:center ;
+    align-content: center;
+    height: auto;
+    width: auto; 
+    /*padding: 4px;*/
+
+}
+
 .imagenes_home{
      /* align-items:center ; */
     /* align-content: center; */
@@ -194,6 +213,15 @@ td{ border: rgb(54, 37, 2) 2px solid;}
     border-radius: 14px;
     padding: 4px;
 
+}
+
+.imagenes_menu{
+   height: 215px;
+   border-radius: 14px;
+   border-color: rgb(116, 33, 3);
+   border: 10px solid transparent;
+   padding: 15px;
+   border-image: url(../img/border.png) 20 round;
 }
 
 .imagenes_redes{
