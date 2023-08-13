@@ -61,16 +61,22 @@ const HomePage = () => {
             <img id="platos_fuertes" src={image_ragu} className="imagenes_home"  
             onMouseOver={() => cambiarImagenOn('platos_fuertes',image_pizza)}  
             onMouseOut={() => cambiarImagenOff('platos_fuertes',image_ragu)} />
-<br />
+
             <img id="postres" src={image_tiramisu} className="imagenes_home" 
             onMouseOver={() => cambiarImagenOn('postres',image_panacota)} 
             onMouseOut={() => cambiarImagenOff('postres',image_tiramisu)} />
           
-  <br /> <br />        
           </div>
-          
+
+
           <div className="contenedor_principal">
-          <br/>  <br/>
+          <hr className="linea_divisoria" />
+          </div>
+
+
+          <div className="contenedor_redes">
+          <br/>     
+
         <img id="facebook" src={image_facebook} className="imagenes_redes"  />
         <img id="instagram" src={image_instagram} className="imagenes_redes"   />
         <img id="whatsapp" src={image_whatsapp} className="imagenes_redes"  />
