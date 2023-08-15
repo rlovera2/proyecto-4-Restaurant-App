@@ -76,10 +76,10 @@ return (
 
   <div className="contenedor_menu">            
 
-  <a name="pastas"></a>
+  <a name="pastas">
 
  <div className="card" style={{width: '18rem'}}>
-  <img src={image_principal} id="plato_pasta" className="card-img-top imagenes_menu_restaurante" alt="Pastas" />
+  <img src={image_bolonesa} id="plato_pasta" className="card-img-top imagenes_menu_restaurante" alt="Pastas" />
   <div className="card-body">
     <h5 className="card-title">Pastas</h5>
     <p className="card-text">Las pastas mas gratas al paladar hechas al momento y a su gusto.</p>
@@ -106,12 +106,11 @@ return (
       <a href="#pastas" 
        onMouseOver={() => cambiarImagenOn('plato_pasta',image_ravioli)}>
         Ravioli</a></li>
-
-
   </ul>
 </div>
+</a>
 
-<a name="pizzas"></a>
+<a name="pizzas">
 
 <div className="card" style={{width: '18rem'}}>
   <img src={image_pizza_margarita} id="plato_pizza" className="card-img-top imagenes_menu_restaurante" alt="Pizzas" />
@@ -141,12 +140,11 @@ return (
     <a href="#pizzas"
     onMouseOver={() => cambiarImagenOn('plato_pizza',image_pizza_prosciutto)}>
     Prosciutto</a></li>
-
-
   </ul>
 </div>
+</a>
 
-<a name="risottos"></a>
+<a name="risottos">
 
 <div className="card" style={{width: '18rem'}}>
   <img src={image_piemontese} id="platos_risottos" className="card-img-top imagenes_menu_restaurante" alt="Risottos" />
@@ -169,9 +167,9 @@ return (
     
   </ul>
 </div>
+</a>
 
-
-<a name="postres"></a>
+<a name="postres">
 
 <div className="card" style={{width: '18rem'}}>
   <img src={image_tiramisu} id="platos_postres" className="card-img-top imagenes_menu_restaurante" alt="Postres" />
@@ -218,6 +216,7 @@ return (
     Tiramisu</a></li>
   </ul>
 </div>
+</a>
 
 </div>
             
