@@ -164,47 +164,50 @@ return (
   </ul>
 </div>
 
+
+<a name="postres"></a>
+
 <div className="card" style={{width: '18rem'}}>
   <img src={image_tiramisu} id="platos_postres" className="card-img-top imagenes_menu_restaurante" alt="Postres" />
   <div className="card-body">
     <h5 className="card-title">Postres</h5>
-    <p className="card-text">La cremosidad y sabores marinos en un formato diferente.</p>
+    <p className="card-text">La variedad mas selecta de postres para consentir su paladar.</p>
   </div>
 
   <ul className="list-group list-group-flush">
   
     <li className="list-group-item">
-    <a href="#"
+    <a href="#postres" 
     onMouseOver={() => cambiarImagenOn('platos_postres',image_crepnutella)}>
     Crep de Nutella</a></li>
 
     <li className="list-group-item">
-    <a href="#"
+    <a href="#postres"
     onMouseOver={() => cambiarImagenOn('platos_postres',image_gelatotartufo)}>
     Gelato al Tartufo</a></li>
     
     <li className="list-group-item">
-    <a href="#"
+    <a href="#postres"
     onMouseOver={() => cambiarImagenOn('platos_postres',image_heladochocolate)}>
     Helado Chocolate</a></li>
 
     <li className="list-group-item">
-    <a href="#"
+    <a href="#postres"
     onMouseOver={() => cambiarImagenOn('platos_postres',image_heladomantecado)}>
     Helado Mantecado</a></li>
 
     <li className="list-group-item">
-    <a href="#"
+    <a href="#postres"
     onMouseOver={() => cambiarImagenOn('platos_postres',image_panacota)}>
     Panacota</a></li>
 
     <li className="list-group-item">
-    <a href="#"
+    <a href="#postres"
     onMouseOver={() => cambiarImagenOn('platos_postres',image_semifredo)}>
     Semifredo</a></li>
 
     <li className="list-group-item">
-    <a href="#"
+    <a href="#postres"
     onMouseOver={() => cambiarImagenOn('platos_postres',image_tiramisu)}>
     Tiramisu</a></li>
   </ul>
