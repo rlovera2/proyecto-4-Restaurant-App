@@ -16,7 +16,7 @@ const Footer = () => {
           Para cualquier falla en el sistema puede ponerse 
           en contacto con el adminisrador del sistema.
           <br />
-          <a href="mailto:reservaciones@lapasta.com" title="reservaciones">reservaciones@lapasta.com</a>
+          <a href="mailto:adminsystem@lapasta.com" title="reservaciones">adminsystem@lapasta.com</a>
           <br /><br />
           </div>
 </span>
