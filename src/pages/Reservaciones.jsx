@@ -183,8 +183,13 @@ const editarReservacion =  (id,id_local,nombre,apellido,n_personas,fecha,hora,de
   // const coleccion = doc(db, "Reservaciones", id);
   // const data = await   getDocs(coleccion);
 
+if (document.getElementById("localizadorInput").value != ""){
+
+  limpiarDatos();
+  limpiarMensajesError();
   idActualizar=id;
   document.getElementById("btnEnviar").style.display = "none";
+  document.getElementById("btnActualizar").style.display="inline";
 
   setValues(
        values.localizador =  id_local,
@@ -197,9 +202,6 @@ const editarReservacion =  (id,id_local,nombre,apellido,n_personas,fecha,hora,de
        values.tipo_tarjeta = tipoTarjeta,
        values.numero_tarjeta = numeroTarjeta,
        values.fecha_vence_tarjeta = fechaVencimientoTarjeta);
-
-      
-  //     alert(values.localizador);
   
        document.getElementById("localizadorInput").value = values.localizador;
        document.getElementById("nombreInput").value = values.nombre.toUpperCase();
@@ -212,11 +214,42 @@ const editarReservacion =  (id,id_local,nombre,apellido,n_personas,fecha,hora,de
        document.getElementById("numeroTarjetaInput").value = values.numero_tarjeta;
        document.getElementById("fechaVencimientoTarjetaInput").value = values.fecha_vence_tarjeta;
 
-       document.getElementById("btnActualizar").style.display="inline";
+       
        
     // setValues(data.docs.map((doc)=> ({...doc.data(), id: doc.id})));
 
+  }
+  else if (document.getElementById("localizadorInput").value == ""){
     
+    limpiarMensajesError();
+    idActualizar=id;
+    document.getElementById("btnEnviar").style.display = "none";
+    document.getElementById("btnActualizar").style.display="inline";  
+    
+    setValues(
+         values.localizador =  id_local,
+         values.nombre = nombre,
+         values.apellido = apellido,
+         values.n_personas = n_personas,
+         values.fecha = fecha,
+         values.hora = hora,
+         values.detalles = detalles,
+         values.tipo_tarjeta = tipoTarjeta,
+         values.numero_tarjeta = numeroTarjeta,
+         values.fecha_vence_tarjeta = fechaVencimientoTarjeta);
+    
+         document.getElementById("localizadorInput").value = values.localizador;
+         document.getElementById("nombreInput").value = values.nombre.toUpperCase();
+         document.getElementById("apellidoInput").value = values.apellido.toUpperCase();
+         document.getElementById("n_personasInput").value = values.n_personas;
+         document.getElementById("fechaInput").value = values.fecha;
+         document.getElementById("horaInput").value = values.hora;
+         document.getElementById("detallesInput").value = values.detalles.toUpperCase();
+         document.getElementById("tipoTarjetaInput").value = values.tipo_tarjeta;
+         document.getElementById("numeroTarjetaInput").value = values.numero_tarjeta;
+         document.getElementById("fechaVencimientoTarjetaInput").value = values.fecha_vence_tarjeta;
+  
+  }    
 
 };
 
@@ -554,7 +587,9 @@ return (
                
                {reservas.map(reserva => {
 
-                const txt_localizador = reserva.data().localizador;
+                if (reserva.data().localizador!=""){
+                
+                 // const txt_localizador = reserva.data().localizador;
 
                   return(
                     
@@ -565,7 +600,7 @@ return (
                      onMouseOver={() => cambiar_color_over(reserva.id)} 
                      onMouseOut={() => cambiar_color_out(reserva.id)}>
                       
-                             <td>{txt_localizador}</td>
+                             <td>{reserva.data().localizador}</td>
                              <td>{reserva.data().fecha}</td>
                              <td>{reserva.data().hora}</td>
                              <td>
@@ -575,7 +610,7 @@ return (
                                 
                                 
                                 reserva.id,
-                                txt_localizador,
+                                reserva.data().localizador,
                                 reserva.data().nombre,
                                 reserva.data().apellido,
                                 reserva.data().n_personas,
@@ -599,8 +634,16 @@ return (
                             </td>
                                         
                          </tr>
-                    </>      
+                    </>     
                   )
+                }else{
+                  return(
+                    <>
+                    <tr><td>No existen reservas en este momento.</td></tr>
+                    
+                   </> 
+                  )
+                }
                     })}
             </table>
             </div> 

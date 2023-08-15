@@ -11,6 +11,13 @@
  import image_semifredo from "../img/semifredo.jpg";
  import image_gelatotartufo from "../img/gelato-tartufo.jpg";
  import image_crepnutella from "../img/crep-nutella.jpg";
+ import image_panacota from "../img/panacota.jpg";
+ import image_tiramisu from "../img/tiramisu.jpg";
+ import image_pizza_cuatro_estaciones from "../img/pizza-cuatro-estaciones.jpg";
+ import image_pizza_margarita from "../img/pizza-margarita.jpg";
+ import image_pizza_funghi from "../img/pizza-funghi.jpg";
+ import image_pizza_prosciutto from "../img/pizza-prosciutto.jpg";
+ 
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -76,29 +83,54 @@ return (
              <ul>
                 <li>
                   <a href="#" 
-                 onMouseOver={() => cambiarImagenOn('platos_fuertes',image_bolonesa)}  
-                 onMouseOut={() => cambiarImagenOff('platos_fuertes',image_principal)}>
+                 onMouseOver={() => cambiarImagenOn('platos_fuertes',image_bolonesa)}>
                  Bolo&ntilde;esa</a></li>
 
                 <li>
                 <a href="#" 
-                 onMouseOver={() => cambiarImagenOn('platos_fuertes',image_carbonara)}  
-                 onMouseOut={() => cambiarImagenOff('platos_fuertes',image_principal)}>
+                 onMouseOver={() => cambiarImagenOn('platos_fuertes',image_carbonara)}>
                  Carbonara</a></li>
 
                 <li>
                 <a href="#" 
-                 onMouseOver={() => cambiarImagenOn('platos_fuertes',image_putanesca)}  
-                 onMouseOut={() => cambiarImagenOff('platos_fuertes',image_principal)}>
+                 onMouseOver={() => cambiarImagenOn('platos_fuertes',image_putanesca)}>
                   Putanesca</a></li>
 
                 <li>
                   <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_ravioli)}  
-                onMouseOut={() => cambiarImagenOff('platos_fuertes',image_principal)}>
+                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_ravioli)}>
                   Ravioli</a></li>
             </ul>
             </td>
+            <td className="celdas_tabla_menu">
+              <span className="subtituloTabla">
+                Pizzas
+              </span>
+            <ul>
+                <li>
+                  <a href="#"
+                  onMouseOver={() => cambiarImagenOn('platos_fuertes',image_pizza_cuatro_estaciones)}>
+                  4 Estaciones</a></li>
+
+                  <li>
+                <a href="#"
+                  onMouseOver={() => cambiarImagenOn('platos_fuertes',image_pizza_funghi)}>
+                  Funghi</a></li>
+
+                <li>
+                <a href="#"
+                  onMouseOver={() => cambiarImagenOn('platos_fuertes',image_pizza_margarita)}>
+                  Margarita</a></li>
+
+                  <li>
+                <a href="#"
+                  onMouseOver={() => cambiarImagenOn('platos_fuertes',image_pizza_prosciutto)}>
+                  Prosciutto</a></li>
+ 
+
+            </ul>    
+     
+          </td>
 
             <td className="celdas_tabla_menu">
               <span className="subtituloTabla">
@@ -107,15 +139,15 @@ return (
             <ul>
                 <li>
                 <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_piemontese)}  
-                onMouseOut={() => cambiarImagenOff('platos_fuertes',image_principal)}>
-                  Piemomtese</a></li>
+                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_alnegro)}>
+                  Al negro</a></li>
 
                 <li>
                 <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_alnegro)}  
-                onMouseOut={() => cambiarImagenOff('platos_fuertes',image_principal)}>
-                  Al negro</a></li>
+                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_piemontese)}>
+                  Piemomtese</a></li>
+
+
             </ul>
             </td>
             
@@ -124,35 +156,41 @@ return (
               Postres
             </span>
             <ul>
-                <li>
+               <li>
                 <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_heladomantecado)}  
-                onMouseOut={() => cambiarImagenOff('platos_fuertes',image_principal)}>
-                  Helado Mantecado</a></li>
+                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_crepnutella)}>
+                  Crep de Nutella</a></li>
+
+               <li>
+                <a href="#"
+                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_gelatotartufo)}>
+                  Gelato al Tartufo</a></li>   
 
                 <li>
                 <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_heladochocolate)}  
-                onMouseOut={() => cambiarImagenOff('platos_fuertes',image_principal)}>
+                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_heladochocolate)}>
                   Helado Chocolate</a></li>
 
-                <li>
+               <li>
                 <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_semifredo)}  
-                onMouseOut={() => cambiarImagenOff('platos_fuertes',image_principal)}>
+                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_heladomantecado)}>
+                  Helado Mantecado</a></li>
+
+               <li>
+                <a href="#"
+                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_panacota)}>
+                  Panacota</a></li>
+
+               <li>
+                <a href="#"
+                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_semifredo)}>
                   Semifredo</a></li>
-                
-                <li>
+
+               <li>
                 <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_gelatotartufo)}  
-                onMouseOut={() => cambiarImagenOff('platos_fuertes',image_principal)}>
-                  Gelato al Tartufo</a></li>
-                  
-                <li>
-                <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_crepnutella)}  
-                onMouseOut={() => cambiarImagenOff('platos_fuertes',image_principal)}>
-                  Crep de Nutella</a></li>
+                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_tiramisu)}>
+                  Tiramisu</a></li>
+              
             </ul>
 
             </td></tr>
