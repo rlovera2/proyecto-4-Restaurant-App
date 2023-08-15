@@ -50,10 +50,10 @@ const Menu = () => {
  };
 
 //************CAMBIANDO IMAGEN PRINCIPAL CUANDO PIERDE EL FOCO ***************/
-const cambiarImagenOff = (id,img) =>{
+// const cambiarImagenOff = (id,img) =>{
           
-  document.getElementById(id).src=img;
-};
+//   document.getElementById(id).src=img;
+// };
  
 
 return (
@@ -73,130 +73,144 @@ return (
             </table>
             <br />
             {/* {imprimirMenu} */}
-            
-          <div className="contenedor_menu">
-            <table>
-                <tr><td className="celdas_tabla_menu">
-                  <span className="subtituloTabla">
-                    Pastas
-                  </span>
-             <ul>
-                <li>
-                  <a href="#" 
-                 onMouseOver={() => cambiarImagenOn('platos_fuertes',image_bolonesa)}>
-                 Bolo&ntilde;esa</a></li>
 
-                <li>
-                <a href="#" 
-                 onMouseOver={() => cambiarImagenOn('platos_fuertes',image_carbonara)}>
-                 Carbonara</a></li>
+  <div className="contenedor_menu">            
 
-                <li>
-                <a href="#" 
-                 onMouseOver={() => cambiarImagenOn('platos_fuertes',image_putanesca)}>
-                  Putanesca</a></li>
+ <div className="card" style={{width: '18rem'}}>
+  <img src={image_principal} id="plato_pasta" className="card-img-top imagenes_menu_restaurante" alt="Pastas" />
+  <div className="card-body">
+    <h5 className="card-title">Pastas</h5>
+    <p className="card-text">Las pastas mas gratas al paladar hechas al momento y a su gusto.</p>
+  </div>
 
-                <li>
-                  <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_ravioli)}>
-                  Ravioli</a></li>
-            </ul>
-            </td>
-            <td className="celdas_tabla_menu">
-              <span className="subtituloTabla">
-                Pizzas
-              </span>
-            <ul>
-                <li>
-                  <a href="#"
-                  onMouseOver={() => cambiarImagenOn('platos_fuertes',image_pizza_cuatro_estaciones)}>
-                  4 Estaciones</a></li>
+  <ul className="list-group list-group-flush">
+  
+    <li className="list-group-item">
+      <a href="#" 
+      onMouseOver={() => cambiarImagenOn('plato_pasta',image_bolonesa)}>
+      Bolo&ntilde;esa</a></li>
 
-                  <li>
-                <a href="#"
-                  onMouseOver={() => cambiarImagenOn('platos_fuertes',image_pizza_funghi)}>
-                  Funghi</a></li>
+    <li className="list-group-item">
+      <a href="#" 
+       onMouseOver={() => cambiarImagenOn('plato_pasta',image_carbonara)}>
+       Carbonara</a></li>
 
-                <li>
-                <a href="#"
-                  onMouseOver={() => cambiarImagenOn('platos_fuertes',image_pizza_margarita)}>
-                  Margarita</a></li>
+    <li className="list-group-item">
+      <a href="#" 
+       onMouseOver={() => cambiarImagenOn('plato_pasta',image_putanesca)}>
+        Putanesca</a></li>
 
-                  <li>
-                <a href="#"
-                  onMouseOver={() => cambiarImagenOn('platos_fuertes',image_pizza_prosciutto)}>
-                  Prosciutto</a></li>
- 
-
-            </ul>    
-     
-          </td>
-
-            <td className="celdas_tabla_menu">
-              <span className="subtituloTabla">
-                Risottos
-              </span>
-            <ul>
-                <li>
-                <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_alnegro)}>
-                  Al negro</a></li>
-
-                <li>
-                <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_piemontese)}>
-                  Piemomtese</a></li>
+    <li className="list-group-item">
+      <a href="#" 
+       onMouseOver={() => cambiarImagenOn('plato_pasta',image_ravioli)}>
+        Ravioli</a></li>
 
 
-            </ul>
-            </td>
-            
-            <td className="celdas_tabla_menu">
-            <span className="subtituloTabla">
-              Postres
-            </span>
-            <ul>
-               <li>
-                <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_crepnutella)}>
-                  Crep de Nutella</a></li>
+  </ul>
+</div>
 
-               <li>
-                <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_gelatotartufo)}>
-                  Gelato al Tartufo</a></li>   
+<div className="card" style={{width: '18rem'}}>
+  <img src={image_pizza_margarita} id="plato_pizza" className="card-img-top imagenes_menu_restaurante" alt="Pizzas" />
+  <div className="card-body">
+    <h5 className="card-title">Pizzas</h5>
+    <p className="card-text">Los distintos sabores en una textura crugiente en una pizza.</p>
+  </div>
 
-                <li>
-                <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_heladochocolate)}>
-                  Helado Chocolate</a></li>
+  <ul className="list-group list-group-flush">
+  
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('plato_pizza',image_pizza_cuatro_estaciones)}>
+    4 Estaciones</a></li>
 
-               <li>
-                <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_heladomantecado)}>
-                  Helado Mantecado</a></li>
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('plato_pizza',image_pizza_funghi)}>
+    Funghi</a></li>
 
-               <li>
-                <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_panacota)}>
-                  Panacota</a></li>
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('plato_pizza',image_pizza_margarita)}>
+    Margarita</a></li>
 
-               <li>
-                <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_semifredo)}>
-                  Semifredo</a></li>
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('plato_pizza',image_pizza_prosciutto)}>
+    Prosciutto</a></li>
 
-               <li>
-                <a href="#"
-                onMouseOver={() => cambiarImagenOn('platos_fuertes',image_tiramisu)}>
-                  Tiramisu</a></li>
-              
-            </ul>
 
-            </td></tr>
-            </table>
-            <img id="platos_fuertes" src={image_principal} height="215" width="275" className="imagenes_menu"/>
-            </div>
+  </ul>
+</div>
+
+<div className="card" style={{width: '18rem'}}>
+  <img src={image_piemontese} className="card-img-top imagenes_menu_restaurante" alt="Risottos" />
+  <div className="card-body">
+    <h5 className="card-title">Risottos</h5>
+    <p className="card-text">La cremosidad y sabores marinos en un formato diferente.</p>
+  </div>
+
+  <ul className="list-group list-group-flush">
+  
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('platos_risottos',image_alnegro)}>
+    Al negro</a></li>
+
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('platos_risottos',image_piemontese)}>
+    Piemomtese</a></li>
+    
+  </ul>
+</div>
+
+<div className="card" style={{width: '18rem'}}>
+  <img src={image_tiramisu} id="platos_postres" className="card-img-top imagenes_menu_restaurante" alt="Postres" />
+  <div className="card-body">
+    <h5 className="card-title">Postres</h5>
+    <p className="card-text">La cremosidad y sabores marinos en un formato diferente.</p>
+  </div>
+
+  <ul className="list-group list-group-flush">
+  
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('platos_postres',image_crepnutella)}>
+    Crep de Nutella</a></li>
+
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('platos_postres',image_gelatotartufo)}>
+    Gelato al Tartufo</a></li>
+    
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('platos_postres',image_heladochocolate)}>
+    Helado Chocolate</a></li>
+
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('platos_postres',image_heladomantecado)}>
+    Helado Mantecado</a></li>
+
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('platos_postres',image_panacota)}>
+    Panacota</a></li>
+
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('platos_postres',image_semifredo)}>
+    Semifredo</a></li>
+
+    <li className="list-group-item">
+    <a href="#"
+    onMouseOver={() => cambiarImagenOn('platos_postres',image_tiramisu)}>
+    Tiramisu</a></li>
+  </ul>
+</div>
+
+</div>
             
           </article>        
           

@@ -168,7 +168,13 @@ td{ border: rgb(54, 37, 2) 2px solid;}
     text-align: center;
  }
 
- 
+.imagenes_menu_restaurante{
+    height: 195px;
+    width: 275px; 
+
+} 
+
+
 .contenedor_principal{
     display: flex;
     flex-flow:wrap;
