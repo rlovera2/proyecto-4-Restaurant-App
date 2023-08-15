@@ -143,7 +143,7 @@ return (
 </div>
 
 <div className="card" style={{width: '18rem'}}>
-  <img src={image_piemontese} className="card-img-top imagenes_menu_restaurante" alt="Risottos" />
+  <img src={image_piemontese} id="platos_risottos" className="card-img-top imagenes_menu_restaurante" alt="Risottos" />
   <div className="card-body">
     <h5 className="card-title">Risottos</h5>
     <p className="card-text">La cremosidad y sabores marinos en un formato diferente.</p>
