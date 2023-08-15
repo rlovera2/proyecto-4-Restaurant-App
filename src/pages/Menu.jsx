@@ -76,6 +76,8 @@ return (
 
   <div className="contenedor_menu">            
 
+  <a name="pastas"></a>
+
  <div className="card" style={{width: '18rem'}}>
   <img src={image_principal} id="plato_pasta" className="card-img-top imagenes_menu_restaurante" alt="Pastas" />
   <div className="card-body">
@@ -86,28 +88,30 @@ return (
   <ul className="list-group list-group-flush">
   
     <li className="list-group-item">
-      <a href="#" 
+      <a href="#pastas" 
       onMouseOver={() => cambiarImagenOn('plato_pasta',image_bolonesa)}>
       Bolo&ntilde;esa</a></li>
 
     <li className="list-group-item">
-      <a href="#" 
+      <a href="#pastas" 
        onMouseOver={() => cambiarImagenOn('plato_pasta',image_carbonara)}>
        Carbonara</a></li>
 
     <li className="list-group-item">
-      <a href="#" 
+      <a href="#pastas" 
        onMouseOver={() => cambiarImagenOn('plato_pasta',image_putanesca)}>
         Putanesca</a></li>
 
     <li className="list-group-item">
-      <a href="#" 
+      <a href="#pastas" 
        onMouseOver={() => cambiarImagenOn('plato_pasta',image_ravioli)}>
         Ravioli</a></li>
 
 
   </ul>
 </div>
+
+<a name="pizzas"></a>
 
 <div className="card" style={{width: '18rem'}}>
   <img src={image_pizza_margarita} id="plato_pizza" className="card-img-top imagenes_menu_restaurante" alt="Pizzas" />
@@ -119,28 +123,30 @@ return (
   <ul className="list-group list-group-flush">
   
     <li className="list-group-item">
-    <a href="#"
+    <a href="#pizzas"
     onMouseOver={() => cambiarImagenOn('plato_pizza',image_pizza_cuatro_estaciones)}>
     4 Estaciones</a></li>
 
     <li className="list-group-item">
-    <a href="#"
+    <a href="#pizzas"
     onMouseOver={() => cambiarImagenOn('plato_pizza',image_pizza_funghi)}>
     Funghi</a></li>
 
     <li className="list-group-item">
-    <a href="#"
+    <a href="#pizzas"
     onMouseOver={() => cambiarImagenOn('plato_pizza',image_pizza_margarita)}>
     Margarita</a></li>
 
     <li className="list-group-item">
-    <a href="#"
+    <a href="#pizzas"
     onMouseOver={() => cambiarImagenOn('plato_pizza',image_pizza_prosciutto)}>
     Prosciutto</a></li>
 
 
   </ul>
 </div>
+
+<a name="risottos"></a>
 
 <div className="card" style={{width: '18rem'}}>
   <img src={image_piemontese} id="platos_risottos" className="card-img-top imagenes_menu_restaurante" alt="Risottos" />
@@ -152,12 +158,12 @@ return (
   <ul className="list-group list-group-flush">
   
     <li className="list-group-item">
-    <a href="#"
+    <a href="#risottos"
     onMouseOver={() => cambiarImagenOn('platos_risottos',image_alnegro)}>
     Al negro</a></li>
 
     <li className="list-group-item">
-    <a href="#"
+    <a href="#risottos"
     onMouseOver={() => cambiarImagenOn('platos_risottos',image_piemontese)}>
     Piemomtese</a></li>
     
