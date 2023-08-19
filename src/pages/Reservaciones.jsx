@@ -193,12 +193,12 @@ if (document.getElementById("localizadorInput").value != ""){
 
   setValues(
        values.localizador =  id_local,
-       values.nombre = nombre.toUpperCase(),
-       values.apellido = apellido.toUpperCase(),
+       values.nombre = nombre,
+       values.apellido = apellido,
        values.n_personas = n_personas,
        values.fecha = fecha,
        values.hora = hora,
-       values.detalles = detalles.toUpperCase(),
+       values.detalles = detalles,
        values.tipo_tarjeta = tipoTarjeta,
        values.numero_tarjeta = numeroTarjeta,
        values.fecha_vence_tarjeta = fechaVencimientoTarjeta);
@@ -228,12 +228,12 @@ if (document.getElementById("localizadorInput").value != ""){
     
     setValues(
          values.localizador =  id_local,
-         values.nombre = nombre.toUpperCase(),
-         values.apellido = apellido.toUpperCase(),
+         values.nombre = nombre,
+         values.apellido = apellido,
          values.n_personas = n_personas,
          values.fecha = fecha,
          values.hora = hora,
-         values.detalles = detalles.toUpperCase(),
+         values.detalles = detalles,
          values.tipo_tarjeta = tipoTarjeta,
          values.numero_tarjeta = numeroTarjeta,
          values.fecha_vence_tarjeta = fechaVencimientoTarjeta);
