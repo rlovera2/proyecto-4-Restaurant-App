@@ -193,12 +193,12 @@ if (document.getElementById("localizadorInput").value != ""){
 
   setValues(
        values.localizador =  id_local,
-       values.nombre = nombre,
-       values.apellido = apellido,
+       values.nombre = nombre.toUpperCase(),
+       values.apellido = apellido.toUpperCase(),
        values.n_personas = n_personas,
        values.fecha = fecha,
        values.hora = hora,
-       values.detalles = detalles,
+       values.detalles = detalles.toUpperCase(),
        values.tipo_tarjeta = tipoTarjeta,
        values.numero_tarjeta = numeroTarjeta,
        values.fecha_vence_tarjeta = fechaVencimientoTarjeta);
@@ -228,12 +228,12 @@ if (document.getElementById("localizadorInput").value != ""){
     
     setValues(
          values.localizador =  id_local,
-         values.nombre = nombre,
-         values.apellido = apellido,
+         values.nombre = nombre.toUpperCase(),
+         values.apellido = apellido.toUpperCase(),
          values.n_personas = n_personas,
          values.fecha = fecha,
          values.hora = hora,
-         values.detalles = detalles,
+         values.detalles = detalles.toUpperCase(),
          values.tipo_tarjeta = tipoTarjeta,
          values.numero_tarjeta = numeroTarjeta,
          values.fecha_vence_tarjeta = fechaVencimientoTarjeta);
@@ -259,7 +259,7 @@ const actualizarReservacion = async  () =>{
     validarDatos();
     //generarLocalizador();
     const coleccion = doc(db, "Reservaciones", idActualizar);
-    await updateDoc(coleccion,values);
+    await updateDoc(coleccion, values);
     await obtenerReservaciones(); 
     alert("Se actualizo la reservacion con exito, con el número de localizador ( "+ 
               document.getElementById("localizadorInput").value +" ) ");
