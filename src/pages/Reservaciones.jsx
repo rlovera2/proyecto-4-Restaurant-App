@@ -142,6 +142,13 @@ const limpiarDatos = () =>{
    
 };
 
+const limpiarDatos_y_mensajesError = () =>{
+    limpiarDatos();
+    limpiarMensajesError();
+    document.getElementById("nombreInput").focus();
+};
+
+
 const generarLocalizador = () =>{
   values.localizador = values.fecha +  "-" + 
   values.nombre.toUpperCase().substring(0, 1) + 
@@ -540,7 +547,7 @@ return (
            
                     <br />
 
-                    <input type="reset" value="Limpiar Datos" className="botones_formularios" />&nbsp; 
+                    <input type="reset" value="Limpiar Datos" className="botones_formularios" onClick={limpiarDatos_y_mensajesError} />&nbsp; 
                     <input type="submit" value="Enviar" className="botones_formularios" id="btnEnviar"  />&nbsp;
                     
                     <input type="button" value="Actualizar" 
