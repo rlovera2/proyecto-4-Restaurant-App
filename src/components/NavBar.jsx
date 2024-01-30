@@ -1,17 +1,27 @@
 import { NavLink } from "react-router-dom";
 import image1 from "../img/tenedor_pasta1.jpg";
+import image2 from "../img/tenedor_pasta2.jpg";
+import { cambiarImagenOn } from "./reloadIMG";
+import { cambiarImagenOff } from "./reloadIMG";
 
 const NavBar = () => {
   return (
     <nav
-      className="navbar navbar-expand-lg bg-body-tertiary bg-dark"
-      data-bs-theme="dark" 
+      className="navbar navbar-expand-lg color_fondo_menu"
+      data-bs-theme="dark"
     >
       <div className="container" height="auto" width="500px">
         <a className="navbar-brand" href="/">
-          <img src={image1} height="15%" width="15%" />
-          <font color="#FFFFFF">
-        La Pasta</font>
+          <img
+            src={image1}
+            height="15%"
+            width="15%"
+            alt="Tenedor"
+            id="img_Tenedor"
+            onMouseOver={() => cambiarImagenOn("img_Tenedor", image2)}
+            onMouseOut={() => cambiarImagenOff("img_Tenedor", image1)}
+          />
+          <font color="#FFFFFF">La Pasta</font>
         </a>
         <button
           className="navbar-toggler"
@@ -37,7 +47,7 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link"  to="/reservaciones"> 
+              <NavLink className="nav-link" to="/reservaciones">
                 Reservaciones
               </NavLink>
             </li>
@@ -47,7 +57,6 @@ const NavBar = () => {
               </NavLink>
             </li>
           </ul>
-
         </div>
       </div>
     </nav>
